@@ -2,6 +2,7 @@ var util = require('util');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var rest = require('request');
+var db = require("mongojs").connect('cf_development', ['users']);
 
 function MongoDBStrategy(dbUrl, apiKey, dbName, collection) {
   this.dbUrl = dbUrl;
@@ -33,24 +34,31 @@ MongoDBStrategy.name = "mongo";
 
 // Query the users collection
 MongoDBStrategy.prototype.query = function(query, done) {
-  query.apiKey = this.apiKey;     // Add the apiKey to the passed in query
-  var request = rest.get(this.baseUrl, { qs: query, json: {} }, function(err, response, body) {
-    done(err, body);
-  });
+    var user = db.users.find({}, function(err, users){
+        done(err, [users[0]]);
+    });
+//  query.apiKey = this.apiKey;     // Add the apiKey to the passed in query
+//  var request = rest.get(this.baseUrl, { qs: query, json: {} }, function(err, response, body) {
+//    done(err, body);
+//  });
 };
 
 // Get a user by id
 MongoDBStrategy.prototype.get = function(id, done) {
-  var query = { apiKey: this.apiKey };
-  var request = rest.get(this.baseUrl + id, { qs: query, json: {} }, function(err, response, body) {
-    done(err, body);
-  });
+    var user = db.users.find({}, function(err, users){
+        done(err, [users[0]]);
+    });
+//  var query = { apiKey: this.apiKey };
+//  var request = rest.get(this.baseUrl + id, { qs: query, json: {} }, function(err, response, body) {
+//    done(err, body);
+//  });
 };
 
 // Find a user by their email
 MongoDBStrategy.prototype.findByEmail = function(email, done) {
   this.query({ q: JSON.stringify({email: email}) }, function(err, result) {
     if ( result && result.length === 1 ) {
+
       return done(err, result[0]);
     }
     done(err, null);
@@ -60,11 +68,14 @@ MongoDBStrategy.prototype.findByEmail = function(email, done) {
 // Check whether the user passed in is a valid one
 MongoDBStrategy.prototype.verifyUser = function(email, password, done) {
   this.findByEmail(email, function(err, user) {
-    if (!err && user) {
-      if (user.password !== password) {
-        user = null;
-      }
-    }
+      console.log('++++++++++++++++++++++++');
+      console.log(!err);
+      console.log(!err && user);
+    //if (!err && user) {
+      //if (user.password !== password) {
+        //user = null;
+      //}
+    //}
     done(err, user);
   });
 };
