@@ -1,15 +1,12 @@
+var config = require('./config');
 var util = require('util');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var rest = require('request');
-var db = require("mongojs").connect('cf_development', ['users']);
+var mongojs = require("mongojs");
+var db = mongojs.connect(config.security.dbName, [ config.security.usersCollection ]);
 
-function MongoDBStrategy(dbUrl, apiKey, dbName, collection) {
-  this.dbUrl = dbUrl;
-  this.apiKey = apiKey;
-  this.dbName = dbName;
-  this.collection = collection;
-  this.baseUrl = this.dbUrl + '/databases/' + this.dbName + '/collections/' + collection + '/';
+function MongoDBStrategy() {
 
   // Call the super constructor - passing in our user verification function
   // We use the email field for the username
@@ -34,50 +31,23 @@ MongoDBStrategy.name = "mongo";
 
 // Query the users collection
 MongoDBStrategy.prototype.query = function(query, done) {
-    var user = db.users.find({}, function(err, users){
+    var user = db.users.find(query, function(err, users){
         done(err, [users[0]]);
     });
-//  query.apiKey = this.apiKey;     // Add the apiKey to the passed in query
-//  var request = rest.get(this.baseUrl, { qs: query, json: {} }, function(err, response, body) {
-//    done(err, body);
-//  });
 };
 
 // Get a user by id
 MongoDBStrategy.prototype.get = function(id, done) {
-    var user = db.users.find({}, function(err, users){
+    var user = db.users.findOne({_id: mongojs.ObjectId(id) } , function(err, users){
         done(err, [users[0]]);
     });
-//  var query = { apiKey: this.apiKey };
-//  var request = rest.get(this.baseUrl + id, { qs: query, json: {} }, function(err, response, body) {
-//    done(err, body);
-//  });
-};
-
-// Find a user by their email
-MongoDBStrategy.prototype.findByEmail = function(email, done) {
-  this.query({ q: JSON.stringify({email: email}) }, function(err, result) {
-    if ( result && result.length === 1 ) {
-
-      return done(err, result[0]);
-    }
-    done(err, null);
-  });
 };
 
 // Check whether the user passed in is a valid one
 MongoDBStrategy.prototype.verifyUser = function(email, password, done) {
-  this.findByEmail(email, function(err, user) {
-      console.log('++++++++++++++++++++++++');
-      console.log(!err);
-      console.log(!err && user);
-    //if (!err && user) {
-      //if (user.password !== password) {
-        //user = null;
-      //}
-    //}
-    done(err, user);
-  });
+    var user = db.users.findOne({ email: email }, function(err, user){
+        done(err, user);
+    });
 };
 
 module.exports = MongoDBStrategy;
