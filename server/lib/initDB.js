@@ -3,7 +3,7 @@ var rest = require('request');
 var mongojs = require('mongojs');
 
 var initDB = {
-  adminUser: { email: 'admin@abc.com', password: 'changeme', admin: true, firstName: 'Admin', lastName: 'User' },
+  adminUser: { email: 'admin2@abc.com', password: 'changeme', admin: true, firstName: 'Admin', lastName: 'User' },
 
   initialize: function(cfg) {
     initDB.db = mongojs(cfg.security.dbName);
@@ -41,22 +41,22 @@ var initDB = {
   addAdminUser: function(done) {
     console.log('*** Admin user properties:', initDB.adminUser);
     console.log('Checking that admin user does not exist...');
-    initDB.checkDocument(initDB.usersCollection, initDB.adminUser, function(err, data) {
-      if ( !err && data.length === 0 ) {
-        console.log('Creating new admin user...', err, data);
-        initDB.createDocument(initDB.usersCollection, initDB.adminUser, function(err, data) {
+    initDB.checkDocument(initDB.usersCollection, initDB.adminUser, function(err, doc) {
+      if ( !err ) {
+        console.log('Creating new admin user...', err, doc);
+        initDB.createDocument(initDB.usersCollection, initDB.adminUser, function(err, doc) {
           console.log('Created new admin user...');
           console.log(err);
-          console.log(data);
-          done(err, data);
+          console.log(doc);
+          done(err, doc);
         });
       } else {
-        if (data.message) {
-          console.log('Error: ' + data.message);
+        if (doc) {
+          console.log('Error: ' + doc);
         } else {
           console.log('User already created.');
         }
-        done(err, data);
+        done(err, doc);
       }
     });
   }
