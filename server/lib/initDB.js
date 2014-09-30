@@ -1,47 +1,41 @@
 // code for initializing the DB w/ an admin user
 var rest = require('request');
+var mongojs = require('mongojs');
 
 var initDB = {
   adminUser: { email: 'admin@abc.com', password: 'changeme', admin: true, firstName: 'Admin', lastName: 'User' },
 
   initialize: function(cfg) {
-    initDB.apiKey = cfg.mongo.apiKey;
-    initDB.baseUrl = cfg.mongo.dbUrl + '/databases/' + cfg.security.dbName + '/collections/';
+    initDB.db = mongojs(cfg.security.dbName);
     initDB.usersCollection = cfg.security.usersCollection;
   },
   
   checkDocument: function(collection, query, done) {
-    var url = initDB.baseUrl + collection + '/';
-    console.log("rest.get - " + url);
-    var params = { apiKey:initDB.apiKey, q: JSON.stringify(query) };
-    var request = rest.get(url, { qs: params, json: {} }, function(err, response, data) {
-      if ( err ) {
-        console.log('There was an error checking the documents', err);
+    initDB.db.collection(collection).findOne( query, function(err, doc){
+      if( err ){
+        console.log("Error in checking user documents", err);
       }
-      done(err, data);
-    });
+      done(err, doc)
+    })
   },
   
   createDocument: function(collection, doc, done) {
-    var url = initDB.baseUrl + collection + '/';
-    console.log("rest.post - " + url);
-    var request = rest.post(url, { qs: { apiKey:initDB.apiKey }, json: doc }, function(err, response, data) {
-      if ( !err ) {
-        console.log('Document created', data);
-      }
-      done(err, data);
-    });
+      initDB.db.collection(collection).save( doc, function(err, doc){
+          if( err ){
+              console.log("Error in creating user documents", err);
+          }
+          done(err, doc)
+      })
   },
   
   deleteDocument: function(collection, docId, done) {
-    var url = initDB.baseUrl + collection + '/' + docId;
-    console.log("rest.del - " + url);
-    var request = rest.del(url, { qs: { apiKey:initDB.apiKey }, json: {} }, function(err, response, data) {
-      if ( !err ) {
-        console.log('Document deleted', data);
-      }
-      done(err, data);
-    });
+      initDB.db.collection(collection).remove( { _id: mongojs.ObjectId(docId) }, true, function(err, doc){
+          if( err ){
+              console.log("Error in deleting user documents", err);
+          }
+          done(err, doc)
+      })
+
   },
   
   addAdminUser: function(done) {
