@@ -20,7 +20,7 @@ var filterUser = function(user) {
 };
 
 var security = {
-  initialize: function(url, apiKey, dbName, authCollection) {
+  initialize: function() {
     passport.use(new MongoStrategy());
   },
   authenticationRequired: function(req, res, next) {

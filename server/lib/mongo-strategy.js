@@ -1,4 +1,4 @@
-var config = require('./config');
+var config = require('./../config');
 var util = require('util');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
