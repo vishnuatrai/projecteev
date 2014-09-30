@@ -14,7 +14,7 @@ function MongoDBStrategy() {
 
   // Serialize the user into a string (id) for storing in the session
   passport.serializeUser(function(user, done) {
-    done(null, user._id.$oid); // Remember that MongoDB has this weird { _id: { $oid: 1234567 } } structure
+    done(null, user._id); // Remember that MongoDB has this weird { _id: { $oid: 1234567 } } structure
   });
 
   // Deserialize the user from a string (id) into a user (via a cll to the DB)
