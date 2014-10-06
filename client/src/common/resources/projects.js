@@ -1,7 +1,6 @@
-angular.module('resources.projects', ['mongolabResource']);
-angular.module('resources.projects').factory('Projects', ['mongolabResource', function ($mongolabResource) {
+angular.module('resources.projects').factory('Projects', function ($resource) {
 
-  var Projects = $mongolabResource('projects');
+  var Projects = $resource('/api/products/:productId');
 
   Projects.forUser = function(userId, successcb, errorcb) {
     //TODO: get projects for this user only (!)
@@ -43,4 +42,4 @@ angular.module('resources.projects').factory('Projects', ['mongolabResource', fu
   };
 
   return Projects;
-}]);
+});
