@@ -39,25 +39,6 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.namespace('/databases/:db/collections/:collection*', function() {
-  app.all('/', function(req, res, next) {
-    if ( req.method !== 'GET' ) {
-      // We require the user is authenticated to modify any collections
-      security.authenticationRequired(req, res, next);
-    } else {
-      next();
-    }
-  });
-  app.all('/', function(req, res, next) {
-    if ( req.method !== 'GET' && (req.params.collection === 'users' || req.params.collection === 'projects') ) {
-      // We require the current user to be admin to modify the users or projects collection
-      return security.adminRequired(req, res, next);
-    }
-    next();
-  });
-
-});
-
 require('./lib/routes/security').addRoutes(app, security);
 require('./lib/routes/appFile').addRoutes(app, config);
 
@@ -73,3 +54,5 @@ server.listen(config.server.listenPort, '0.0.0.0', 511, function() {
 console.log('Angular App Server - listening on port: ' + config.server.listenPort);
 secureServer.listen(config.server.securePort);
 console.log('Angular App Server - listening on secure port: ' + config.server.securePort);
+
+console.log(app.routes);
