@@ -1,6 +1,7 @@
-angular.module('resources.tasks').factory('Tasks', function ($resource) {
+angular.module('resources.tasks', ['mongolabResource']);
+angular.module('resources.tasks').factory('Tasks', ['mongolabResource', function (mongolabResource) {
 
-  var Tasks = $resource('/api/tasks/:taskId');
+  var Tasks = mongolabResource('tasks');
 
   Tasks.statesEnum = ['TODO', 'IN_DEV', 'BLOCKED', 'IN_TEST', 'DONE'];
 
@@ -21,4 +22,4 @@ angular.module('resources.tasks').factory('Tasks', function ($resource) {
   };
 
   return Tasks;
-});
+}]);

@@ -12,6 +12,11 @@ angular.module('app', [
   'templates.app',
   'templates.common']);
 
+angular.module('app').constant('MONGOLAB_CONFIG', {
+  baseUrl: '/databases/',
+  dbName: 'ascrum'
+});
+
 //TODO: move those messages to a separate module
 angular.module('app').constant('I18N.MESSAGES', {
   'errors.route.changeError':'Route change error',
