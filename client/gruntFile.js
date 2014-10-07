@@ -96,10 +96,7 @@ module.exports = function (grunt) {
         src:['vendor/angular/angular.js', 'vendor/angular/angular-route.js'],
         dest: '<%= distdir %>/angular.js'
       },
-      mongo: {
-        src:['vendor/mongolab/*.js'],
-        dest: '<%= distdir %>/mongolab.js'
-      },
+
       bootstrap: {
         src:['vendor/angular-ui/bootstrap/*.js'],
         dest: '<%= distdir %>/bootstrap.js'
@@ -120,10 +117,6 @@ module.exports = function (grunt) {
       angular: {
         src:['<%= concat.angular.src %>'],
         dest: '<%= distdir %>/angular.js'
-      },
-      mongo: {
-        src:['vendor/mongolab/*.js'],
-        dest: '<%= distdir %>/mongolab.js'
       },
       bootstrap: {
         src:['vendor/angular-ui/bootstrap/*.js'],
