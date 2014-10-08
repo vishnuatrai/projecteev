@@ -18,7 +18,12 @@ function MongoDBStrategy() {
   });
 
   // Deserialize the user from a string (id) into a user (via a cll to the DB)
-  passport.deserializeUser(this.get.bind(this));
+  //passport.deserializeUser(this.get.bind(this));
+  passport.deserializeUser(function(id, done) {
+    db.users.findOne({_id: mongojs.ObjectId(id) } , function(err, users){
+      done(err, [users[0]]);
+    });
+  });
 
   // We want this strategy to have a nice name for use by passport, e.g. app.post('/login', passport.authenticate('mongo'));
   this.name = MongoDBStrategy.name;
