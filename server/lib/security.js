@@ -48,8 +48,8 @@ var security = {
       if (err) { return next(err); }
       if (!user) { return filterUser(user); }
       req.logIn(user, function(err) {
-        if ( err ) { return next(err); }
-        return filterUser(user);
+        if ( err ) { return next( res.json(err) ); }
+        return res.json(filterUser(user));
       });
     }
     return passport.authenticate(MongoStrategy.name, authenticationFailed)(req, res, next);
