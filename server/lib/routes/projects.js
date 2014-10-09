@@ -1,4 +1,6 @@
 exports.addRoutes = function (app, config) {
-  // projects
-  // scrums
+
+    app.get('/projectsinfo', function(req,res){
+        res.json( [{ }] );
+    });
 };

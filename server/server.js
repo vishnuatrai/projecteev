@@ -41,6 +41,7 @@ app.use(function(req, res, next) {
 
 require('./lib/routes/security').addRoutes(app, security);
 require('./lib/routes/appFile').addRoutes(app, config);
+require('./lib/routes/projects').addRoutes(app, config);
 
 // A standard error handler - it picks up any left over errors and returns a nicely formatted server 500 error
 app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
