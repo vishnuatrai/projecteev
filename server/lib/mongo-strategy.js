@@ -38,8 +38,8 @@ MongoDBStrategy.prototype.query = function(query, done) {
 
 // Get a user by id
 MongoDBStrategy.prototype.get = function(id, done) {
-    var user = db.users.findOne({_id: mongojs.ObjectId(id) } , function(err, users){
-        done(err, [users[0]]);
+    var user = db.users.findOne({_id: mongojs.ObjectId(id) } , function(err, user){
+        done(err, user);
     });
 };
 
