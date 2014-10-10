@@ -4,7 +4,7 @@ angular.module('resources.projects').factory('Projects', function ($resource) {
   var Projects = $resource('/projectsinfo');
 
   Projects.forUser = function(userId, successcb, errorcb) {
-    return Projects.query({}, successcb, errorcb);
+    return Projects.query({ userId: userId }, successcb, errorcb);
   };
 
   Projects.prototype.isProductOwner = function (userId) {

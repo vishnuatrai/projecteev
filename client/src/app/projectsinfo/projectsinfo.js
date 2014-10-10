@@ -5,7 +5,7 @@ angular.module('projectsinfo', [], ['$routeProvider', function($routeProvider){
     controller:'ProjectsInfoListCtrl',
     resolve:{
       projects:['Projects', function(Projects){
-        return Projects.all();
+        return Projects.forUser();
       }]
     }
   });
