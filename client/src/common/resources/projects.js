@@ -1,10 +1,9 @@
 angular.module('resources.projects', []);
 angular.module('resources.projects').factory('Projects', function ($resource) {
 
-  var Projects = $resource('projects');
+  var Projects = $resource('/projectsinfo');
 
   Projects.forUser = function(userId, successcb, errorcb) {
-    //TODO: get projects for this user only (!)
     return Projects.query({}, successcb, errorcb);
   };
 

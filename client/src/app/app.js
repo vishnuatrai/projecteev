@@ -1,5 +1,6 @@
 angular.module('app', [
   'ngRoute',
+  'ngResource',
   'projectsinfo',
   'dashboard',
   'projects',
