@@ -1,7 +1,10 @@
+var Project = require('./../models/project');
 exports.addRoutes = function (app, config) {
 
   app.get('/projectsinfo', function(req,res){
-    res.json(200, req.user );
+      Project.byUser(req.user._id, function(users){
+          res.json(200, users );
+      })
   });
 
 };

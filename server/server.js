@@ -17,6 +17,8 @@ var app = express();
 var secureServer = https.createServer(credentials, app);
 var server = http.createServer(app);
 
+var models = require('./lib/models');
+
 app.use(protectJSON);
 app.use(express.logger());                                  // Log requests to the console
 app.use(express.bodyParser());                              // Extract the data from the body of the request - this is needed by the LocalStrategy authenticate method
