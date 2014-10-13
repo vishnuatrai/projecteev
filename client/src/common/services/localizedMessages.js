@@ -1,4 +1,4 @@
-angular.module('services.localizedMessages', []).factory('localizedMessages', ['$interpolate', 'I18N.MESSAGES', function ($interpolate, i18nmessages) {
+angular.module('services.localizedMessages', ['services.i18nMessages']).factory('localizedMessages', ['$interpolate', 'I18N.MESSAGES', function ($interpolate, i18nmessages) {
 
   var handleNotFound = function (msg, msgKey) {
     return msg || '?' + msgKey + '?';
