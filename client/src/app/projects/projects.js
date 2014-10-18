@@ -7,7 +7,7 @@ angular.module('projects', ['resources.projects', 'productbacklog', 'sprints', '
     resolve:{
       projects:['Projects', function (Projects) {
         //TODO: fetch only for the current user
-        return Projects.all();
+        return Projects.forUser();
       }],
       authenticatedUser: securityAuthorizationProvider.requireAuthenticatedUser
     }

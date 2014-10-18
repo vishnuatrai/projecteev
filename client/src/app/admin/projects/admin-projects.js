@@ -13,7 +13,7 @@ angular.module('admin-projects', [
 
   crudRouteProvider.routesFor('Projects', 'admin')
     .whenList({
-      projects: ['Projects', function(Projects) { return Projects.all(); }],
+      projects: ['Projects', function(Projects) { return Projects.forUser(); }],
       adminUser: securityAuthorizationProvider.requireAdminUser
     })
     .whenNew({

@@ -6,6 +6,11 @@ var User = {
         db.users.findOne( { id: mongojs.ObjectId(id) }, function(err, user){
             done(user)
         });
+    },
+    all: function(query, done){
+        db.users.find( query, function(err, users){
+            done(users)
+        });
     }
 };
 module.exports = User;

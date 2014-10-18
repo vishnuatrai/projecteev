@@ -41,6 +41,7 @@ app.use(function(req, res, next) {
 require('./lib/routes/static').addRoutes(app, config);
 require('./lib/routes/projects').addRoutes(app, config);
 require('./lib/routes/tasks').addRoutes(app, config);
+require('./lib/routes/users').addRoutes(app, config);
 require('./lib/routes/security').addRoutes(app, security);
 require('./lib/routes/appFile').addRoutes(app, config);
 

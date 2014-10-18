@@ -6,5 +6,9 @@ angular.module('resources.users').factory('Users', function ($resource) {
     return this.lastName + " " + this.firstName + " (" + this.email + ")";
   };
 
+    userResource.forUser = function (userId) {
+      return userResource.query({userId:userId});
+   };
+
   return userResource;
 });
