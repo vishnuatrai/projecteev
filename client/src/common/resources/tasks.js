@@ -21,5 +21,9 @@ angular.module('resources.tasks').factory('Tasks', function ($resource) {
     return Tasks.query({projectId:projectId});
   };
 
+  Tasks.all = function (projectId) {
+    return Tasks.query({projectId:projectId});
+  };
+
   return Tasks;
 });

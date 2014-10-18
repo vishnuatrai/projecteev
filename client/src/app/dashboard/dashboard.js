@@ -7,7 +7,7 @@ angular.module('dashboard', ['resources.projects', 'resources.tasks'])
     resolve:{
       projects:['Projects', function (Projects) {
         //TODO: need to know the current user here
-        return Projects.all();
+        return Projects.forUser();
       }],
       tasks:['Tasks', function (Tasks) {
         //TODO: need to know the current user here
