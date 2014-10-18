@@ -6,6 +6,14 @@ var Project = {
      db.projects.find({ userId: uid }, function(err, projects){
          done(projects)
      });
+  },
+
+  all: function(query, done){
+    db.projects.find( query, function(err, projects){
+      done(projects)
+    });
   }
+
+
 };
 module.exports = Project;

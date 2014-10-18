@@ -39,6 +39,7 @@ app.use(function(req, res, next) {
 });
 
 require('./lib/routes/static').addRoutes(app, config);
+require('./lib/routes/admin').addRoutes(app, config);
 require('./lib/routes/projects').addRoutes(app, config);
 require('./lib/routes/tasks').addRoutes(app, config);
 require('./lib/routes/users').addRoutes(app, config);
