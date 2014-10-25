@@ -6,9 +6,29 @@ angular.module('resources.users').factory('Users', function ($resource) {
     return this.lastName + " " + this.firstName + " (" + this.email + ")";
   };
 
-    userResource.forUser = function (userId) {
-      return userResource.query({userId:userId});
-   };
+  userResource.prototype.$saveOrUpdate = function (params) {
+    return userResource;
+  };
 
-  return userResource;
+  userResource.prototype.$id = function (params) {
+    return userResource;
+  };
+
+  userResource.prototype.$remove = function (params) {
+    return userResource;
+  };
+
+  userResource.forUser = function (userId) {
+    return userResource.query({userId:userId});
+  };
+
+  userResource.byEmail = function (email, done) {
+    console.log('---------------------------------');
+    console.log(email);
+    users = userResource.query( {email: email } );
+    done(users);
+  };
+
+    return userResource;
+
 });

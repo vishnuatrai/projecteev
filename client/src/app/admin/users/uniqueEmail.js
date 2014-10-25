@@ -16,7 +16,7 @@ angular.module('admin-users-edit-uniqueEmail', ['resources.users'])
       ctrl.$parsers.push(function (viewValue) {
 
         if (viewValue) {
-          Users.query({email:viewValue}, function (users) {
+          Users.byEmail(viewValue, function (users) {
             if (users.length === 0) {
               ctrl.$setValidity('uniqueEmail', true);
             } else {
