@@ -19,16 +19,17 @@ angular.module('resources.users').factory('Users', function ($resource) {
   };
 
   userResource.forUser = function (userId) {
-    return userResource.query({userId:userId});
+    return userResource.query({userId: userId });
   };
 
-  userResource.byEmail = function (email, done) {
-    console.log('---------------------------------');
-    console.log(email);
-    users = userResource.query( {email: email } );
-    done(users);
+  userResource.getById = function (userId) {
+    return userResource.query({ userId: userId });
   };
 
-    return userResource;
+  userResource.byEmail = function (email) {
+    return userResource.query({email: email });
+  };
+
+  return userResource;
 
 });
