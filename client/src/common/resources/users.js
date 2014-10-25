@@ -23,7 +23,7 @@ angular.module('resources.users').factory('Users', function ($resource) {
   };
 
   userResource.getById = function (userId) {
-    return userResource.query({ userId: userId });
+      return $resource('/admin/users/:userId').get( { userId: userId } );
   };
 
   userResource.byEmail = function (email) {
