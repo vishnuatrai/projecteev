@@ -10,8 +10,8 @@ angular.module('resources.users').factory('Users', function ($resource) {
     return userResource;
   };
 
-  userResource.prototype.$id = function (params) {
-    return userResource;
+  userResource.prototype.$id = function () {
+    return this._id;
   };
 
   userResource.prototype.$remove = function (params) {
