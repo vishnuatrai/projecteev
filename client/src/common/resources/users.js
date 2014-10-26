@@ -27,7 +27,7 @@ angular.module('resources.users').factory('Users', function ($resource) {
   };
 
   userResource.byEmail = function (email) {
-    return userResource.query({email: email });
+      return $resource('/users/:email').get( { email: email } );
   };
 
   return userResource;

@@ -7,6 +7,13 @@ var User = {
             done(user)
         });
     },
+
+    byEmail: function(email,done){
+        db.users.findOne( { email: email }, function(err, user){
+            done(user)
+        });
+    },
+
     all: function(query, done){
         db.users.find( query, function(err, users){
             done(users)
