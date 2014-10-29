@@ -41,5 +41,17 @@ angular.module('resources.projects').factory('Projects', function ($resource) {
     return roles;
   };
 
+  Projects.prototype.$saveOrUpdate = function (params) {
+    return userResource;
+  };
+
+  Projects.prototype.$id = function () {
+    return this._id;
+  };
+
+  Projects.prototype.$remove = function (params) {
+    return userResource;
+  };
+
   return Projects;
 });

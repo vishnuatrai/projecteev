@@ -22,6 +22,10 @@ angular.module('resources.users').factory('Users', function ($resource) {
     return userResource.query({userId: userId });
   };
 
+  userResource.all = function (params) {
+      return userResource.query(params);
+  };
+
   userResource.getById = function (userId) {
     return $resource('/admin/users/:userId').get( { userId: userId } );
   };
