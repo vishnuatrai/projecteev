@@ -18,6 +18,12 @@ var User = {
         db.users.find( query, function(err, users){
             done(users)
         });
+    },
+
+    delete: function(id,done){
+        db.users.remove( { '_id': mongojs.ObjectId(id) }, function(err){
+            done()
+        });
     }
 };
 module.exports = User;

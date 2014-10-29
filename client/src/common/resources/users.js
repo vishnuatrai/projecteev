@@ -14,8 +14,14 @@ angular.module('resources.users').factory('Users', function ($resource) {
     return this._id;
   };
 
-  userResource.prototype.$remove = function (params) {
-    return userResource;
+  userResource.prototype.$remove = function (sucfun,errfun) {
+      try{
+          $resource('/admin/users/:userId').delete( { userId: userId } );
+          sucfun
+      }catch(e){
+          errfun
+      }
+
   };
 
   userResource.forUser = function (userId) {

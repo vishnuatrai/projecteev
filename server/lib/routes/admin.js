@@ -14,6 +14,13 @@ exports.addRoutes = function (app, config) {
         })
     });
 
+
+    app.delete('/admin/users/:userId', function(req,res){
+        User.delete(req.params.userId, function(){
+            res.json(200, {});
+        })
+    });
+
     app.get('/admin/projects', function(req,res){
         Project.all({}, function(users){
             res.json(200, users );
