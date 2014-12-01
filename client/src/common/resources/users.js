@@ -6,8 +6,10 @@ angular.module('resources.users').factory('Users', function ($resource) {
     return this.lastName + " " + this.firstName + " (" + this.email + ")";
   };
 
-  userResource.prototype.$saveOrUpdate = function (params) {
-    return userResource;
+  userResource.prototype.$saveOrUpdate = function (onSave, onSave, onError, onError) {
+      $resource('/admin/users/:userId').save(this, function(note) {
+          onSave(note);
+      });
   };
 
   userResource.prototype.$id = function () {

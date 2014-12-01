@@ -20,6 +20,12 @@ var User = {
         });
     },
 
+    create: function(params, done){
+        db.users.insert( params, function(){
+            done();
+        });
+    },
+
     delete: function(id,done){
         db.users.remove( { '_id': mongojs.ObjectId(id) }, function(err){
             done()
