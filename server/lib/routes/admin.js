@@ -15,8 +15,8 @@ exports.addRoutes = function (app, config) {
     });
 
     app.post('/admin/users', function(req,res){
-        User.create(req.body, function(){
-            res.json(200, req.body);
+        User.create(req.body, function(user){
+            res.json(200, user);
         })
     });
 

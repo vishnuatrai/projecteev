@@ -21,8 +21,8 @@ var User = {
     },
 
     create: function(params, done){
-        db.users.insert( params, function(){
-            done();
+        db.users.insert( params, function(err, user){
+            done(user);
         });
     },
 
