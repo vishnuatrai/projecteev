@@ -35,7 +35,9 @@ angular.module('resources.users').factory('Users', function ($resource) {
   };
 
   userResource.getById = function (userId) {
-    return $resource('/admin/users/:userId').get( { userId: userId } );
+    var user = $resource('/admin/users/:userId').get( { userId: userId } );
+    user.__proto__= this.prototype;
+    return user;
   };
 
   userResource.byEmail = function (email) {
