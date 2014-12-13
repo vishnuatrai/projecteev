@@ -20,10 +20,25 @@ var User = {
         });
     },
 
-    create: function(params, done){
-        db.users.insert( params, function(err, user){
-            done(user);
-        });
+    createOrUpdate: function(params, done){
+        var id = params['_id'];
+        delete params['_id'];
+
+        if(id){
+            db.users.findAndModify({
+                  query: { '_id': mongojs.ObjectId(id) },
+                  update: { $set: params }
+                },
+                function(err, user, lastErrorObject){
+                  done(user);
+                }
+            );
+        }else{
+            db.users.insert( params, function(err, user){
+                done(user);
+            });
+        }
+
     },
 
     delete: function(id,done){
