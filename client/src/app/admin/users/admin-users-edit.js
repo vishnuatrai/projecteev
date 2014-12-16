@@ -19,7 +19,7 @@ angular.module('admin-users-edit',[
     i18nNotifications.pushForCurrentRoute('crud.user.save.error', 'error');
   };
 
-  $scope.onRemove = function(user) {
+  $scope.onRemove = function() {
     i18nNotifications.pushForNextRoute('crud.user.remove.success', 'success', {id : user.$id()});
     $location.path('/admin/users');
   };

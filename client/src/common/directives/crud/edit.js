@@ -54,7 +54,7 @@ angular.module('directives.crud.edit', [])
       // The following functions should be triggered by elements on the form
       // - e.g. ng-click="save()"
       scope.save = function() {
-        resource.$saveOrUpdate(onSave, onSave, onError, onError);
+        resource.$saveOrUpdate(onSave, onError);
       };
       scope.revertChanges = function() {
         resource = angular.copy(original);

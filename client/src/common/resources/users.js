@@ -6,7 +6,7 @@ angular.module('resources.users').factory('Users', function ($resource) {
     return this.lastName + " " + this.firstName + " (" + this.email + ")";
   };
 
-  userResource.prototype.$saveOrUpdate = function (onSave, onSave, onError, onError) {
+  userResource.prototype.$saveOrUpdate = function (onSave, onError) {
       $resource('/admin/users/:userId').save(this, function(note) {
           onSave(note);
       });
@@ -18,7 +18,7 @@ angular.module('resources.users').factory('Users', function ($resource) {
 
   userResource.prototype.$remove = function (sucfun,errfun) {
       try{
-          $resource('/admin/users/:userId').delete( { userId: this._id } );
+          $resource('/admin/users/:userId').delete( { userId: this['_id'] } );
           sucfun();
       }catch(e){
           errfun();
