@@ -1,1 +1,15 @@
 <h3>Projects info</h3>
+<table class="table table-bordered table-condensed table-striped table-hover">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="project in projects" ng-click="edit(project.$id())">
+        <td>{{project.name}}</td>
+        <td>{{project.desc}}</td>
+    </tr>
+    </tbody>
+</table>
