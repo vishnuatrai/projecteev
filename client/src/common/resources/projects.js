@@ -7,6 +7,12 @@ angular.module('resources.projects').factory('Projects', function ($resource) {
     return Projects.query({ userId: userId }, successcb, errorcb);
   };
 
+  Projects.getById = function (projectId) {
+    var project = $resource('/admin/projects/:projectId').get( { projectId: projectId } );
+    project.__proto__= this.prototype;
+    return project;
+  };
+
   Projects.prototype.isProductOwner = function (userId) {
     return this.productOwner === userId;
   };

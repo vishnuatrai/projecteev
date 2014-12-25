@@ -17,12 +17,19 @@ angular.module('projectsinfo', [], ['$routeProvider', function($routeProvider){
 
 }]);
 
-angular.module('projectsinfo').controller('ProjectsInfoListCtrl', ['$scope', 'projects', function($scope, projects){
+angular.module('projectsinfo').controller('ProjectsInfoListCtrl', ['$scope', '$location' ,'projects', function($scope, $location, projects){
   $scope.projects = projects;
-}]);
-
-angular.module('projectsinfo').controller('ProjectsShowCtrl', ['$scope', 'projects', function($scope, Projects){
-
-  $scope.project = Projects.getById($route.current.params.itemId);
+    $scope.edit = function(itemId){
+        return $location.url('/projectsinfo/'+itemId);
+    }
 
 }]);
+
+angular.module('projectsinfo').controller('ProjectsShowCtrl', ['$scope', '$location', 'i18nNotifications', 'users', 'project', function($scope, $location, i18nNotifications, users, project) {
+
+    $scope.project = project;
+
+
+    
+
+}])
