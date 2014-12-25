@@ -11,25 +11,23 @@ angular.module('projectsinfo', [], ['$routeProvider', function($routeProvider){
   })
 
   .when('/projectsinfo/:projectId', {
-        templateUrl: 'projects-show.tpl.html',
+        templateUrl: 'projectsinfo/projects-show.tpl.html',
         controller:'ProjectsShowCtrl'
       });
 
 }]);
 
 angular.module('projectsinfo').controller('ProjectsInfoListCtrl', ['$scope', '$location' ,'projects', function($scope, $location, projects){
+
   $scope.projects = projects;
-    $scope.edit = function(itemId){
-        return $location.url('/projectsinfo/'+itemId);
-    }
+  $scope.edit = function(itemId){
+    return $location.url('/projectsinfo/'+itemId);
+  }
 
 }]);
 
-angular.module('projectsinfo').controller('ProjectsShowCtrl', ['$scope', '$location', 'i18nNotifications', 'users', 'project', function($scope, $location, i18nNotifications, users, project) {
+angular.module('projectsinfo').controller('ProjectsShowCtrl', ['$scope', '$location', 'i18nNotifications', 'Projects', function($scope, $location, i18nNotifications, Projects) {
 
-    $scope.project = project;
-
-
-    
+    $scope.project = Projects.forUser()[0];
 
 }])
