@@ -26,10 +26,24 @@ exports.addRoutes = function (app, config) {
         })
     });
 
+    app.get('/admin/projects/users', function(req,res){
+        User.all({}, function(users){
+            res.json(200, users );
+        })
+    });
+
     app.get('/admin/projects', function(req,res){
         Project.all({}, function(users){
             res.json(200, users );
         })
     });
+
+    app.post('/admin/projects', function(req,res){
+        Project.createOrUpdate(req.body, function(project){
+            res.json(200, project);
+        })
+    });
+
+
 
 };

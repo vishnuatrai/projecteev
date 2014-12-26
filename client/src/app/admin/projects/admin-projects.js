@@ -61,19 +61,22 @@ angular.module('admin-projects', [
 
   $scope.productOwnerCandidates = function() {
     return $scope.users.filter(function(user) {
-      return $scope.usersLookup[user.$id()] && $scope.project.canActAsProductOwner(user.$id());
+      return true;
+      //return $scope.usersLookup[user.$id()] && $scope.project.canActAsProductOwner(user.$id());
     });
   };
 
   $scope.scrumMasterCandidates = function() {
     return $scope.users.filter(function(user) {
-      return $scope.usersLookup[user.$id()] && $scope.project.canActAsScrumMaster(user.$id());
+      return true;
+      //return $scope.usersLookup[user.$id()] && $scope.project.canActAsScrumMaster(user.$id());
     });
   };
 
   $scope.teamMemberCandidates = function() {
     return $scope.users.filter(function(user) {
-      return $scope.usersLookup[user.$id()] && $scope.project.canActAsDevTeamMember(user.$id()) && !$scope.project.isDevTeamMember(user.$id());
+      return true;
+      //return $scope.usersLookup[user.$id()] && $scope.project.canActAsDevTeamMember(user.$id()) && !$scope.project.isDevTeamMember(user.$id());
     });
   };
 
