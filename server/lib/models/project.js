@@ -39,6 +39,12 @@ var Project = {
             });
         }
 
+    },
+
+    delete: function(id,done){
+        db.projects.remove( { '_id': mongojs.ObjectId(id) }, function(err){
+            done()
+        });
     }
 
 

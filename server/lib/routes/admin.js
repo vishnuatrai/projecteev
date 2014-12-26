@@ -44,6 +44,12 @@ exports.addRoutes = function (app, config) {
         })
     });
 
+    app.delete('/admin/projects/:projectId', function(req,res){
+        Project.delete(req.params.projectId, function(){
+            res.json(200, {});
+        })
+    });
+
 
 
 };

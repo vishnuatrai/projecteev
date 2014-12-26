@@ -40,12 +40,17 @@ angular.module('admin-projects', [
   $scope.users = users;
 
   $scope.onSave = function(project) {
-    i18nNotifications.pushForNextRoute('crud.project.save.success', 'success', {id : project.$id()});
+    i18nNotifications.pushForNextRoute('crud.project.save.success', 'success', {id : project['_id']});
     $location.path('/admin/projects');
   };
 
   $scope.onError = function() {
     i18nNotifications.pushForCurrentRoute('crud.project.save.error', 'error');
+  };
+
+  $scope.onRemove = function() {
+    i18nNotifications.pushForNextRoute('crud.project.remove.success', 'success', {id : project.$id()});
+    $location.path('/admin/projects');
   };
 
 }])
