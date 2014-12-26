@@ -7,4 +7,10 @@ exports.addRoutes = function (app, config) {
       });
   });
 
+    app.get('/projectsinfo/:projectId', function(req,res){
+        Project.byId(req.params.projectId, function(project){
+            res.json(200, project);
+        })
+    });
+
 };

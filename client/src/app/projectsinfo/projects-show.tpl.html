@@ -1,56 +1,35 @@
 <div class="well">
-    <form name="form" crud-edit="project">
-        <legend>Project</legend>
-        <div class="row-fluid">
-            <div class="span6">
-                <label>Name</label>
-                <input type="text" name="name" ng-model="project.name" class="span10" required autofocus>
-                <label>Description</label>
-                <textarea rows="10" cols="10" ng-model="project.desc" class="span10">
-                </textarea>
-            </div>
-            <div class="span6" ng-controller="TeamMembersController">
-                <label>Product Owner</label>
-                <select class="span12" ng-model="project.productOwner"
-                        ng-options="user.$id() as user.getFullName() for user in productOwnerCandidates()" required>
-                    <option value="">-- choose --</option>
-                </select>
-                <label>Scrum Master</label>
-                <select class="span12" ng-model="project.scrumMaster"
-                        ng-options="user.$id() as user.getFullName() for user in scrumMasterCandidates()" required>
-                    <option value="">-- choose --</option>
-                </select>
-                <label>Development Team</label>
-                <table class="table table-bordered table-condensed table-striped table-hover">
-                    <thead>
-                    <tr>
-                        <th>User</th>
-                        <th>&nbsp;</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr ng-repeat="userId in project.teamMembers">
-                        <td>{{usersLookup[userId].getFullName()}}</td>
-                        <td>
-                            <button class="btn btn-small" ng-click="removeTeamMember(userId)">Remove</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><select class="span6" ng-model="selTeamMember"
-                                    ng-options="user.$id() as user.getFullName() for user in teamMemberCandidates()"></select>
-                        </td>
-                        <td>
-                            <button class="btn btn-small" ng-click="addTeamMember(selTeamMember)" ng-disabled="!selTeamMember">Add
-                            </button>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+    <legend>{{ project.name }}</legend>
+    <div class="row-fluid">
+        <div class="span6">
+            <span class="span10">{{ project.desc }}</span>
         </div>
-        <div class="row-fluid">
-            <hr>
-            <crud-buttons class="span12"></crud-buttons>
+        <div class="span6" ng-controller="TeamMembersController">
+            <label>Product Owner</label>
+            <span>{{ project.productOwner }}</span>
+            <label>Scrum Master</label>
+            <span>{{ project.scrumMaster }}</span>
+            <label>Development Team</label>
+            <table class="table table-bordered table-condensed table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>User</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="userId in project.teamMembers">
+                    <td>{{ usersLookup[userId].getFullName() }}</td>
+                </tr>
+                </tbody>
+            </table>
         </div>
-    </form>
+    </div>
+    <div class="row-fluid">
+        <hr>
+        <div class="span12">
+            <button type="button" class="btn btn-primary save" ng-click="back()" >Back</button>
+        </div>
+    </div>
 </div>
+
+

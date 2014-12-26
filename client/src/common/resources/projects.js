@@ -8,7 +8,7 @@ angular.module('resources.projects').factory('Projects', function ($resource) {
   };
 
   Projects.getById = function (projectId) {
-    var project = $resource('/admin/projects/:projectId').get( { projectId: projectId } );
+    var project = $resource('/projectsinfo/:projectId').get( { projectId: projectId } );
     project.__proto__= this.prototype;
     return project;
   };

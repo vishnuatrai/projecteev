@@ -12,7 +12,13 @@ var Project = {
     db.projects.find( query, function(err, projects){
       done(projects)
     });
-  }
+  },
+
+    byId: function(id,done){
+        db.projects.findOne( { '_id': mongojs.ObjectId(id) }, function(err, project){
+            done(project)
+        });
+    }
 
 
 };
