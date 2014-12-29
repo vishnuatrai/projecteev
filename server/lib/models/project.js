@@ -23,22 +23,9 @@ var Project = {
     createOrUpdate: function(params, done){
         var id = params['_id'];
         delete params['_id'];
-
-        if(id){
-            db.projects.findAndModify({
-                    query: { '_id': mongojs.ObjectId(id) },
-                    update: { $set: params }
-                },
-                function(err, project, lastErrorObject){
-                    done(project);
-                }
-            );
-        }else{
-            db.projects.insert( params, function(err, project){
-                done(project);
-            });
-        }
-
+        db.projects.findAndModify( { query: { "_id": mongojs.ObjectId(id) }, update: { $set: params } , new:true, upsert: true  }, function(err, project){
+            done(project);
+        });
     },
 
     delete: function(id,done){
