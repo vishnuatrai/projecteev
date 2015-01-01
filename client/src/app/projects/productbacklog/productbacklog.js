@@ -32,7 +32,7 @@ angular.module('productbacklog', ['resources.productbacklog', 'services.crud'])
       .whenEdit({
         projectId: projectId,
         backlogItem : ['$route', 'ProductBacklog', function($route, ProductBacklog){
-          return ProductBacklog.getById($route.current.params.itemId);
+          return ProductBacklog.getById(projectId, $route.current.params.itemId);
         }]
       });
   }])
