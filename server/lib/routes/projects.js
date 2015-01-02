@@ -1,5 +1,6 @@
 var Project = require('./../models/project');
 var Task = require('./../models/task');
+var Sprint = require('./../models/sprint');
 exports.addRoutes = function (app, config) {
 
   app.get('/projectsinfo', function(req,res){
@@ -37,6 +38,12 @@ exports.addRoutes = function (app, config) {
   app.delete('/projects/:projectId/productbacklog/:taskId', function(req,res){
     Task.delete(req.params.taskId, function(){
       res.json(200, {});
+    })
+  });
+
+  app.get('/projects/:projectId/sprints', function(req,res){
+    Sprint.all({ project_id: req.params.projectId }, function(sprints){
+      res.json(200, sprints);
     })
   });
 
