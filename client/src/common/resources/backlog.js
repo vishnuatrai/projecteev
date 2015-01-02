@@ -1,6 +1,6 @@
 angular.module('resources.productbacklog', []);
 angular.module('resources.productbacklog').factory('ProductBacklog', function ($resource) {
-  var ProductBacklog = $resource('productbacklog');
+  var ProductBacklog = $resource('/projects/:projectId/productbacklog');
 
   ProductBacklog.forProject = function (projectId) {
     return ProductBacklog.query({projectId:projectId});

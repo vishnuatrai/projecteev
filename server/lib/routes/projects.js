@@ -47,4 +47,24 @@ exports.addRoutes = function (app, config) {
     })
   });
 
+  app.post('/projects/:projectId/sprints', function(req,res){
+    var params = req.body;
+    params['project_id'] = req.params.projectId;
+    Sprint.createOrUpdate(params, function(sprint){
+      res.json(200, sprint);
+    })
+  });
+
+  app.get('/projects/:projectId/sprints/:sprintId', function(req,res){
+    Sprint.byId(req.params.sprintId, function(sprint){
+      res.json(200, sprint);
+    })
+  });
+
+  app.delete('/projects/:projectId/sprints/:sprintId', function(req,res){
+    Sprint.delete(req.params.sprintId, function(){
+      res.json(200, {});
+    })
+  });
+
 };

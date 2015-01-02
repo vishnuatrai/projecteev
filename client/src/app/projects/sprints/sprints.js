@@ -29,7 +29,7 @@ angular.module('sprints', ['resources.sprints', 'services.crud', 'tasks'])
   .whenEdit({
     projectId: projectId,
     sprint: ['$route', 'Sprints', function($route, Sprints){
-      return Sprints.getById($route.current.params.itemId);
+      return Sprints.getById(projectId,$route.current.params.itemId);
     }],
     productBacklog : productBacklog
   });
