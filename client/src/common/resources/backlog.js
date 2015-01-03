@@ -3,7 +3,9 @@ angular.module('resources.productbacklog').factory('ProductBacklog', function ($
   var ProductBacklog = $resource('/projects/:projectId/productbacklog');
 
   ProductBacklog.forProject = function (projectId) {
-    return ProductBacklog.query({projectId:projectId});
+    return ProductBacklog.query({projectId:projectId}).$promise.then(
+        function( result ){  return result; }
+    );
   };
 
   ProductBacklog.getById = function (projectId,taskId) {
