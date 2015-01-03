@@ -21,11 +21,11 @@ angular.module('dashboard', ['resources.projects', 'resources.tasks'])
   $scope.projects = projects;
   $scope.tasks = tasks;
 
-  $scope.manageBacklog = function (projectId) {
-    $location.path('/projects/' + projectId + '/productbacklog');
+  $scope.manageBacklog = function (project) {
+    $location.path('/projects/' + project.$id() + '/productbacklog');
   };
 
-  $scope.manageSprints = function (projectId) {
-    $location.path('/projects/' + projectId + '/sprints');
+  $scope.manageSprints = function (project) {
+    $location.path('/projects/' + project.$id() + '/sprints');
   };
 }]);
