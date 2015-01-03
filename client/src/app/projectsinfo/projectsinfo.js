@@ -47,11 +47,11 @@ angular.module('projectsinfo').controller('ProjectsShowCtrl', ['$scope', '$locat
         $scope.usersLookup[value.$id()] = value;
     });
 
-    $scope.productOwnerFullName = function () {
+    $scope.project.productOwnerFullName = function () {
         return $scope.usersLookup[$scope.project.productOwner].getFullName();
     };
 
-    $scope.scrumMasterFullName = function () {
+    $scope.project.scrumMasterFullName = function () {
         return $scope.usersLookup[$scope.project.scrumMaster].getFullName();
     };
 

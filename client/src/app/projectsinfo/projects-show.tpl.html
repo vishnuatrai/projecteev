@@ -5,11 +5,11 @@
             <span class="span10">{{ project.desc }}</span>
         </div>
         <div class="span6" ng-controller="TeamMembersController">
-            <label>Product Owner</label>
-            <span>{{ project.productOwnerFullName }}</span>
-            <label>Scrum Master</label>
-            <span>{{ project.scrumMasterFullName }}</span>
-            <label>Development Team</label>
+            <label><strong>Product Owner</strong></label>
+            <span>{{ project.productOwnerFullName() }}</span>
+            <label><strong>Scrum Master</strong></label>
+            <span>{{ project.scrumMasterFullName() }}</span>
+            <label><strong>Development Team</strong></label>
             <table class="table table-bordered table-condensed table-striped table-hover">
                 <thead>
                 <tr>
