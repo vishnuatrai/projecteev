@@ -14,12 +14,6 @@ angular.module('resources.productbacklog').factory('ProductBacklog', function ($
     return product_backlog;
   };
 
-  ProductBacklog.getByIds = function (projectId,ids) {
-    return ProductBacklog.query({ projectId:projectId, sprintBacklog: ids }).$promise.then(
-        function( result ){  return result; }
-    );
-  };
-
   ProductBacklog.prototype.$saveOrUpdate = function (onSave, onError) {
     $resource('/projects/' + this.projectId + '/productbacklog/:projectBacklogId').save(this, function(product_backlog) {
       onSave(product_backlog);

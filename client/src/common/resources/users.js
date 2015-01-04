@@ -36,12 +36,6 @@ angular.module('resources.users').factory('Users', function ($resource) {
     return user;
   };
 
-  userResource.getByIds = function (ids) {
-    return userResource.query({ teamMembers: ids }).$promise.then(
-        function( result ){  return result; }
-    );
-  };
-
   userResource.byEmail = function (email) {
     return $resource('/users/:email').get( { email: email } );
   };

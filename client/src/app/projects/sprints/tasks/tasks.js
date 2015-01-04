@@ -3,17 +3,13 @@ angular.module('tasks', ['resources.tasks', 'services.crud'])
 .config(['crudRouteProvider', function (crudRouteProvider) {
 
   var sprintBacklogItems = ['Sprints', 'ProductBacklog', '$route', function (Sprints, ProductBacklog, $route) {
-    var sprintPromise = Sprints.getById($route.current.params.projectId, $route.current.params.sprintId);
-    return sprintPromise.then(function (sprint) {
-      return ProductBacklog.getByIds($route.current.params.projectId, sprint.sprintBacklog);
-    });
+    var sprint = Sprints.getById($route.current.params.projectId, $route.current.params.sprintId).$promise.then(function(sprint){ return sprint; });
+    return ProductBacklog.query({ projectId: $route.current.params.projectId, sprintBacklog: sprint.sprintBacklog }).$promise.then(function( result ){  return result; });
   }];
 
   var teamMembers = ['Projects', 'Users', '$route', function (Projects, Users, $route) {
-    var projectPromise = Projects.getById($route.current.params.projectId);
-    return projectPromise.then(function(project){
-      return Users.getByIds(project.teamMembers);
-    });
+    var project = Projects.getById($route.current.params.projectId).$promise.then(function(project){ return project; } );
+    return Users.query({ teamMembers: project.teamMembers }).$promise.then( function( result ){  return result; } );
   }];
 
   crudRouteProvider.routesFor('Tasks', 'projects/sprints', 'projects/:projectId/sprints/:sprintId')
