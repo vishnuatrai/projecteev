@@ -1,7 +1,7 @@
 angular.module('resources.tasks', []);
 angular.module('resources.tasks').factory('Tasks', function ($resource) {
 
-  var Tasks = $resource('tasks');
+  var Tasks = $resource('/projects/:projectId/sprints/:sprintId/tasks');
 
   Tasks.statesEnum = ['TODO', 'IN_DEV', 'BLOCKED', 'IN_TEST', 'DONE'];
 
@@ -9,8 +9,8 @@ angular.module('resources.tasks').factory('Tasks', function ($resource) {
     return Tasks.query({productBacklogItem:productBacklogItem});
   };
 
-  Tasks.forSprint = function (sprintId) {
-    return Tasks.query({sprintId:sprintId});
+  Tasks.forSprint = function (projectId, sprintId) {
+    return Tasks.query({ projectId:projectId, sprintId:sprintId });
   };
 
   Tasks.forUser = function (userId) {
@@ -23,6 +23,20 @@ angular.module('resources.tasks').factory('Tasks', function ($resource) {
 
   Tasks.all = function (projectId) {
     return Tasks.query({projectId:projectId});
+  };
+
+  Tasks.prototype.$saveOrUpdate = function (onSave, onError) {
+    $resource('/projects/' + this.projectId + '/sprints/' + this.sprintId + '/tasks/:taskId').save(this, function(task) {
+      onSave(task);
+    });
+  };
+
+  Tasks.prototype.$id = function () {
+    return this._id;
+  };
+
+  Tasks.prototype.$remove = function (onRemove, onError) {
+    return $resource('/tasks/:taskId').delete( { taskId: this['_id'] }, onRemove, onError );
   };
 
   return Tasks;

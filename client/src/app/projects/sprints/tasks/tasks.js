@@ -3,9 +3,9 @@ angular.module('tasks', ['resources.tasks', 'services.crud'])
 .config(['crudRouteProvider', function (crudRouteProvider) {
 
   var sprintBacklogItems = ['Sprints', 'ProductBacklog', '$route', function (Sprints, ProductBacklog, $route) {
-    var sprintPromise = Sprints.getById($route.current.params.sprintId);
+    var sprintPromise = Sprints.getById($route.current.params.projectId, $route.current.params.sprintId);
     return sprintPromise.then(function (sprint) {
-      return ProductBacklog.getByIds(sprint.sprintBacklog);
+      return ProductBacklog.getByIds($route.current.params.projectId, sprint.sprintBacklog);
     });
   }];
 
@@ -20,7 +20,7 @@ angular.module('tasks', ['resources.tasks', 'services.crud'])
 
   .whenList({
     tasks:['Tasks', '$route', function (Tasks, $route) {
-      return Tasks.forSprint($route.current.params.sprintId);
+      return Tasks.forSprint($route.current.params.projectId, $route.current.params.sprintId);
     }]
   })
 

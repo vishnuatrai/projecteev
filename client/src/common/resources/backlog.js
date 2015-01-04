@@ -8,15 +8,21 @@ angular.module('resources.productbacklog').factory('ProductBacklog', function ($
     );
   };
 
-  ProductBacklog.getById = function (projectId,taskId) {
-    var product_backlog = $resource('/projects/' + projectId + '/productbacklog/:taskId').get( { taskId: taskId } );
+  ProductBacklog.getById = function (projectId,projectBacklogId) {
+    var product_backlog = $resource('/projects/' + projectId + '/productbacklog/:projectBacklogId').get( { projectBacklogId: projectBacklogId } );
     product_backlog.__proto__= this.prototype;
     return product_backlog;
   };
 
+  ProductBacklog.getByIds = function (projectId,ids) {
+    return ProductBacklog.query({ projectId:projectId, sprintBacklog: ids }).$promise.then(
+        function( result ){  return result; }
+    );
+  };
+
   ProductBacklog.prototype.$saveOrUpdate = function (onSave, onError) {
-    $resource('/projects/' + this.projectId + '/productbacklog/:taskId').save(this, function(task) {
-      onSave(task);
+    $resource('/projects/' + this.projectId + '/productbacklog/:projectBacklogId').save(this, function(product_backlog) {
+      onSave(product_backlog);
     });
   };
 
@@ -25,7 +31,7 @@ angular.module('resources.productbacklog').factory('ProductBacklog', function ($
   };
 
   ProductBacklog.prototype.$remove = function (onRemove, onError) {
-    return $resource('/projects/'+ this.projectId +'/productbacklog/:taskId').delete( { taskId: this['_id'] }, onRemove, onError );
+    return $resource('/projects/'+ this.projectId +'/productbacklog/:projectBacklogId').delete( { projectBacklogId: this['_id'] }, onRemove, onError );
   };
 
   return ProductBacklog;
