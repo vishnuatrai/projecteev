@@ -21,6 +21,8 @@ angular.module('tasks', ['resources.tasks', 'services.crud'])
   })
 
   .whenNew({
+    projectId: [ '$route', function ($route) { return $route.current.params.projectId } ],
+    sprintId: [ '$route', function ($route) { return $route.current.params.sprintId } ],
     task:['Tasks', '$route', function (Tasks, $route) {
       return new Tasks({
         projectId:$route.current.params.projectId,
@@ -33,8 +35,10 @@ angular.module('tasks', ['resources.tasks', 'services.crud'])
   })
 
   .whenEdit({
+    projectId: [ '$route', function ($route) { return $route.current.params.projectId } ],
+    sprintId: [ '$route', function ($route) { return $route.current.params.sprintId } ],
     task:['Tasks', '$route', function (Tasks, $route) {
-      return Tasks.getById($route.current.params.itemId);
+      return Tasks.getById($route.current.params.projectId, $route.current.params.sprintId, $route.current.params.itemId);
     }],
     sprintBacklogItems:sprintBacklogItems,
     teamMembers:teamMembers
@@ -49,14 +53,15 @@ angular.module('tasks', ['resources.tasks', 'services.crud'])
   angular.extend($scope, crudListMethods('/projects/' + projectId + '/sprints/' + sprintId + '/tasks'));
 }])
 
-.controller('TasksEditCtrl', ['$scope', '$location', '$route', 'Tasks', 'sprintBacklogItems', 'teamMembers', 'task', function ($scope, $location, $route, Tasks, sprintBacklogItems, teamMembers, task) {
+.controller('TasksEditCtrl', ['$scope', '$location', '$route', 'Tasks', 'sprintBacklogItems', 'teamMembers', 'projectId', 'sprintId', 'task',
+      function ($scope, $location, $route, Tasks, sprintBacklogItems, teamMembers, projectId, sprintId, task) {
   $scope.task = task;
   $scope.statesEnum = Tasks.statesEnum;
   $scope.sprintBacklogItems = sprintBacklogItems;
   $scope.teamMembers = teamMembers;
 
   $scope.onSave = function () {
-    $location.path('/admin/users');
+    $location.path('/projects/'+ projectId +'/sprints/' + sprintId + '/tasks');
   };
   $scope.onError = function() {
     $scope.updateError = true;

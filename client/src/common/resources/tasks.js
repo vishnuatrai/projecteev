@@ -25,6 +25,12 @@ angular.module('resources.tasks').factory('Tasks', function ($resource) {
     return Tasks.query({projectId:projectId});
   };
 
+  Tasks.getById = function (projectId, sprintId , taskId) {
+    var task = $resource('/projects/' + projectId + '/sprints/' + sprintId + '/tasks/:taskId').get( { taskId: taskId } );
+    task.__proto__= this.prototype;
+    return task;
+  };
+
   Tasks.prototype.$saveOrUpdate = function (onSave, onError) {
     $resource('/projects/' + this.projectId + '/sprints/' + this.sprintId + '/tasks/:taskId').save(this, function(task) {
       onSave(task);

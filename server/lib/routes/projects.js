@@ -17,14 +17,14 @@ exports.addRoutes = function (app, config) {
   });
 
   app.get('/projects/:projectId/productbacklog', function(req,res){
-    ProductBacklog.all({ project_id: req.params.projectId }, function(product_backlogs){
+    ProductBacklog.all({ projectId: req.params.projectId }, function(product_backlogs){
       res.json(200, product_backlogs);
     })
   });
 
   app.post('/projects/:projectId/productbacklog', function(req,res){
     var params = req.body;
-    params['project_id'] = req.params.projectId;
+    params['projectId'] = req.params.projectId;
     ProductBacklog.createOrUpdate(params, function(product_backlog){
       res.json(200, product_backlog);
     })
@@ -43,14 +43,14 @@ exports.addRoutes = function (app, config) {
   });
 
   app.get('/projects/:projectId/sprints', function(req,res){
-    Sprint.all({ project_id: req.params.projectId }, function(sprints){
+    Sprint.all({ projectId: req.params.projectId }, function(sprints){
       res.json(200, sprints);
     })
   });
 
   app.post('/projects/:projectId/sprints', function(req,res){
     var params = req.body;
-    params['project_id'] = req.params.projectId;
+    params['projectId'] = req.params.projectId;
     Sprint.createOrUpdate(params, function(sprint){
       res.json(200, sprint);
     })
@@ -69,8 +69,21 @@ exports.addRoutes = function (app, config) {
   });
 
   app.get('/projects/:projectId/sprints/:sprintId/tasks', function(req,res){
-    Task.all({ sprint_id: req.params.sprintId }, function(tasks){
+    Task.all({ sprintId: req.params.sprintId }, function(tasks){
       res.json(200, tasks);
+    })
+  });
+
+  app.get('/projects/:projectId/sprints/:sprintId/tasks/:taskId', function(req,res){
+    Task.byId(req.params.taskId, function(task){
+      res.json(200, task);
+    })
+  });
+
+  app.post('/projects/:projectId/sprints/:sprintId/tasks', function(req,res){
+    var params = req.body;
+    Task.createOrUpdate(params, function(task){
+      res.json(200, task);
     })
   });
 
