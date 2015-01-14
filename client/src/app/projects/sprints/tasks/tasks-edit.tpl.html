@@ -1,8 +1,8 @@
 <div class="well">
     <h4>Task</h4>
     <hr>
-    <div class="row-fluid">
-        <form name="form" crud-edit="task">
+    <form name="form" crud-edit="task">
+      <div class="row-fluid">
             <div class="span6">
                 <label>Name</label>
                 <input type="text" name="name" ng-model="task.name" class="span10" required autofocus>
@@ -22,8 +22,8 @@
                 <label>Assigned to</label>
                 <select name="state" ng-model="task.assignedUserId" class="span10" ng-options="teamMember.$id() as teamMember.getFullName() for teamMember in teamMembers"></select>
             </div>
-        </form>
-    </div>
-    <hr>
-    <crud-buttons></crud-buttons>
+      </div>
+      <hr>
+      <crud-buttons></crud-buttons>
+    </form>
 </div>
