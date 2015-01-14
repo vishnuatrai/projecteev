@@ -7,4 +7,10 @@ exports.addRoutes = function (app, config) {
       })
   });
 
+  app.delete('/tasks/:taskId', function(req,res){
+    Task.delete(req.params.taskId, function(){
+      res.json(200, {});
+    })
+  });
+
 };
