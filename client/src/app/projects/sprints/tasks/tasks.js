@@ -15,6 +15,8 @@ angular.module('tasks', ['resources.tasks', 'services.crud'])
   crudRouteProvider.routesFor('Tasks', 'projects/sprints', 'projects/:projectId/sprints/:sprintId')
 
   .whenList({
+    projectId: [ '$route', function ($route) { return $route.current.params.projectId } ],
+    sprintId: [ '$route', function ($route) { return $route.current.params.sprintId } ],
     tasks:['Tasks', '$route', function (Tasks, $route) {
       return Tasks.forSprint($route.current.params.projectId, $route.current.params.sprintId);
     }]
@@ -45,16 +47,14 @@ angular.module('tasks', ['resources.tasks', 'services.crud'])
   });
 }])
 
-.controller('TasksListCtrl', ['$scope', 'crudListMethods', '$route', 'tasks', function ($scope, crudListMethods, $route, tasks) {
+.controller('TasksListCtrl', ['$scope', 'crudListMethods', 'tasks', 'projectId', 'sprintId' , function ($scope, crudListMethods, tasks, projectId, sprintId) {
   $scope.tasks = tasks;
 
-  var projectId = $route.current.params.projectId;
-  var sprintId = $route.current.params.sprintId;
   angular.extend($scope, crudListMethods('/projects/' + projectId + '/sprints/' + sprintId + '/tasks'));
 }])
 
-.controller('TasksEditCtrl', ['$scope', '$location', '$route', 'Tasks', 'sprintBacklogItems', 'teamMembers', 'projectId', 'sprintId', 'task',
-      function ($scope, $location, $route, Tasks, sprintBacklogItems, teamMembers, projectId, sprintId, task) {
+.controller('TasksEditCtrl', ['$scope', '$location', 'Tasks', 'sprintBacklogItems', 'teamMembers', 'projectId', 'sprintId', 'task',
+      function ($scope, $location, Tasks, sprintBacklogItems, teamMembers, projectId, sprintId, task) {
   $scope.task = task;
   $scope.statesEnum = Tasks.statesEnum;
   $scope.sprintBacklogItems = sprintBacklogItems;
