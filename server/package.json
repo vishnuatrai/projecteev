@@ -12,7 +12,8 @@
     "passport-local": "~0.1.6",
     "pg": "^4.2.0",
     "request": "~2.16.6",
-    "sequelize": "^2.0.0-rc7"
+    "sequelize": "^2.0.0-rc7",
+    "sequelize-cli": "^1.0.3"
   },
   "devDependencies": {
     "grunt": "~0.4",
