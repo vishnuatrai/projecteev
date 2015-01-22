@@ -19,11 +19,11 @@ angular.module('resources.sprints').factory('Sprints', function ($resource) {
   };
 
   Sprints.prototype.$id = function () {
-    return this._id;
+    return this.id;
   };
 
   Sprints.prototype.$remove = function (onRemove, onError) {
-    return $resource('/projects/'+ this.projectId +'/sprints/:sprintId').delete( { sprintId: this['_id'] }, onRemove, onError );
+    return $resource('/projects/'+ this.projectId +'/sprints/:sprintId').delete( { sprintId: this['id'] }, onRemove, onError );
   };
 
   return Sprints;

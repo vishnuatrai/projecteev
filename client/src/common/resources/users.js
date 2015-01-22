@@ -13,11 +13,11 @@ angular.module('resources.users').factory('Users', function ($resource) {
   };
 
   userResource.prototype.$id = function () {
-    return this._id;
+    return this.id;
   };
 
   userResource.prototype.$remove = function (onRemove, onError) {
-      return $resource('/admin/users/:userId').delete( { userId: this['_id'] }, onRemove, onError );
+      return $resource('/admin/users/:userId').delete( { userId: this['id'] }, onRemove, onError );
   };
 
   userResource.forUser = function (userId) {

@@ -11,7 +11,7 @@ angular.module('admin-users-edit',[
   $scope.password = user.password;
 
   $scope.onSave = function (user) {
-    i18nNotifications.pushForNextRoute('crud.user.save.success', 'success', {id : user['_id']});
+    i18nNotifications.pushForNextRoute('crud.user.save.success', 'success', {id : user['id']});
     $location.path('/admin/users');
   };
 

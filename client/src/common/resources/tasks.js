@@ -38,11 +38,11 @@ angular.module('resources.tasks').factory('Tasks', function ($resource) {
   };
 
   Tasks.prototype.$id = function () {
-    return this._id;
+    return this.id;
   };
 
   Tasks.prototype.$remove = function (onRemove, onError) {
-    return $resource('/tasks/:taskId').delete( { taskId: this['_id'] }, onRemove, onError );
+    return $resource('/tasks/:taskId').delete( { taskId: this['id'] }, onRemove, onError );
   };
 
   return Tasks;
