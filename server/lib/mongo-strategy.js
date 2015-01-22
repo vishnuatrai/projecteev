@@ -45,9 +45,9 @@ MongoDBStrategy.prototype.get = function(id, done) {
 
 // Check whether the user passed in is a valid one
 MongoDBStrategy.prototype.verifyUser = function(email, password, done) {
-    var user = User.find({ email: email }, function(err, user){
-        done(err, user);
-    });
+    User.find({ email: email }).then( function(user){ user;
+      done(null, user.dataValues);
+    })
 };
 
 module.exports = MongoDBStrategy;
