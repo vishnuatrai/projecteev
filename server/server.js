@@ -39,10 +39,10 @@ app.use(function(req, res, next) {
 });
 
 require('./routes/static').addRoutes(app, config);
-require('./routes/admin').addRoutes(app, config);
-require('./routes/projects').addRoutes(app, config);
-require('./routes/tasks').addRoutes(app, config);
-require('./routes/users').addRoutes(app, config);
+require('./routes/admin').addRoutes(app);
+require('./routes/projects').addRoutes(app);
+require('./routes/tasks').addRoutes(app);
+require('./routes/users').addRoutes(app);
 require('./routes/security').addRoutes(app, security);
 require('./routes/appFile').addRoutes(app, config);
 

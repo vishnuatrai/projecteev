@@ -14,9 +14,8 @@ exports.addRoutes = function (app, config) {
     });
 
     app.post('/admin/users', function(req,res){
-        User.createOrUpdate(req.body, function(user){
-            res.json(200, user);
-        })
+        models.User.findOrCreate({ where: { email: req.body.email }, defaults: req.body })
+            .spread(function(user, created){ res.json(200, user); })
     });
 
     app.delete('/admin/users/:userId', function(req,res){
