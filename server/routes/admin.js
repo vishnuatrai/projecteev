@@ -8,9 +8,7 @@ exports.addRoutes = function (app, config) {
     });
 
     app.get('/admin/users/:userId', function(req,res){
-        models.User.find({ id: req.params.userId } , function(user){
-            res.json(200, user);
-        })
+        models.User.find({ id: req.params.userId }).then(function(user){ res.json(200, user); });
     });
 
     app.post('/admin/users', function(req,res){
