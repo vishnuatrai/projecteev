@@ -29,18 +29,9 @@ util.inherits(MongoDBStrategy, LocalStrategy);
 
 MongoDBStrategy.name = "mongo";
 
-// Query the users collection
-MongoDBStrategy.prototype.query = function(query, done) {
-    var user = User.find(query, function(err, users){
-        done(err, [users[0]]);
-    });
-};
-
 // Get a user by id
 MongoDBStrategy.prototype.get = function(id, done) {
-    var user = User.find({ id: id } , function(err, user){
-        done(err, user);
-    });
+    User.find({ id: id }).then(function(user){ done(null, user.dataValues) });
 };
 
 // Check whether the user passed in is a valid one
