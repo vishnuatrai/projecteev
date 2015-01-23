@@ -31,12 +31,12 @@ MongoDBStrategy.name = "mongo";
 
 // Get a user by id
 MongoDBStrategy.prototype.get = function(id, done) {
-    User.find({ id: id }).then(function(user){ done(null, user.dataValues) });
+    User.find({ where: { id: id } }).then(function(user){ done(null, user.dataValues) });
 };
 
 // Check whether the user passed in is a valid one
 MongoDBStrategy.prototype.verifyUser = function(email, password, done) {
-    User.find({ email: email }).then( function(user){ user;
+    User.find({ where: { email: email } }).then( function(user){ user;
       done(null, user.dataValues);
     })
 };

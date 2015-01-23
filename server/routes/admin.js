@@ -12,36 +12,41 @@ exports.addRoutes = function (app, config) {
     });
 
     app.post('/admin/users', function(req,res){
-        models.User.findOrCreate({ where: { email: req.body.email }, defaults: req.body })
-            .spread(function(user, created){ res.json(200, user); })
+        models.User.findOrInitialize({ where: { id: req.body.id } })
+            .then(function(result){
+                result[0].updateAttributes( req.body )
+            })
+            .then(function(user){ res.json(200, user); })
     });
 
     app.delete('/admin/users/:userId', function(req,res){
-        models.User.delete(req.params.userId, function(){
+        models.User.destroy({where: { id: req.params.userId}}).then(function(result){
             res.json(200, {});
         })
     });
 
     app.get('/admin/projects/users', function(req,res){
-        models.User.all({}, function(users){
+        models.User.findAll({}, function(users){
             res.json(200, users );
         })
     });
 
     app.get('/admin/projects', function(req,res){
-        models.Project.all({}, function(users){
+        models.Project.findAll({}, function(users){
             res.json(200, users );
         })
     });
 
     app.post('/admin/projects', function(req,res){
-        models.Project.createOrUpdate(req.body, function(project){
-            res.json(200, project);
-        })
+        models.Project.findOrInitialize({ where: { id: req.body.id } })
+            .then(function(result){
+                result[0].updateAttributes( req.body )
+            })
+            .then(function(project){ res.json(200, project); })
     });
 
     app.delete('/admin/projects/:projectId', function(req,res){
-        models.Project.delete(req.params.projectId, function(){
+        models.Project.destroy({where: { id: req.params.projectId }}).then(function(result){
             res.json(200, {});
         })
     });
