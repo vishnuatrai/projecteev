@@ -1,5 +1,5 @@
 var models = require('../models');
-exports.addRoutes = function (app, config) {
+exports.addRoutes = function (app) {
 
   app.get('/projectsinfo', function(req,res){
       models.Project.findAll({ productOwner: req.user.id }, function(projects){

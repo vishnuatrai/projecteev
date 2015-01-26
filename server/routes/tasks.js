@@ -1,5 +1,5 @@
 var models = require('../models');
-exports.addRoutes = function (app, config) {
+exports.addRoutes = function (app) {
 
   app.get('/tasks', function(req,res){
       Task.byUser(req.user._id, function(users){

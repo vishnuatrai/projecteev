@@ -1,5 +1,5 @@
 var models = require('../models');
-exports.addRoutes = function (app, config) {
+exports.addRoutes = function (app) {
 
     app.get('/admin/users', function(req,res){
         models.User.findAll({}, function(users){
