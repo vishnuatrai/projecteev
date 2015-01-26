@@ -40,7 +40,7 @@ angular.module('admin-projects', [
   $scope.users = users;
 
   $scope.onSave = function(project) {
-    i18nNotifications.pushForNextRoute('crud.project.save.success', 'success', {id : project['_id']});
+    i18nNotifications.pushForNextRoute('crud.project.save.success', 'success', {id : project['id']});
     $location.path('/admin/projects');
   };
 

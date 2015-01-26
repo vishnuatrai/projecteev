@@ -21,11 +21,11 @@ angular.module('resources.productbacklog').factory('ProductBacklog', function ($
   };
 
   ProductBacklog.prototype.$id = function () {
-    return this._id;
+    return this.id;
   };
 
   ProductBacklog.prototype.$remove = function (onRemove, onError) {
-    return $resource('/projects/'+ this.projectId +'/productbacklog/:projectBacklogId').delete( { projectBacklogId: this['_id'] }, onRemove, onError );
+    return $resource('/projects/'+ this.projectId +'/productbacklog/:projectBacklogId').delete( { projectBacklogId: this['id'] }, onRemove, onError );
   };
 
   return ProductBacklog;

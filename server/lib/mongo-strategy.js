@@ -3,8 +3,8 @@ var util = require('util');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var rest = require('request');
-var mongojs = require("mongojs");
-var db = mongojs.connect(config.security.dbName, [ config.security.usersCollection ]);
+var models  = require('../models');
+var User = models.User;
 
 function MongoDBStrategy() {
 
@@ -14,7 +14,7 @@ function MongoDBStrategy() {
 
   // Serialize the user into a string (id) for storing in the session
   passport.serializeUser(function(user, done) {
-    done(null, user._id); // Remember that MongoDB has this weird { _id: { $oid: 1234567 } } structure
+    done(null, user.id); // Remember that MongoDB has this weird { _id: { $oid: 1234567 } } structure
   });
 
   // Deserialize the user from a string (id) into a user (via a cll to the DB)
@@ -29,25 +29,16 @@ util.inherits(MongoDBStrategy, LocalStrategy);
 
 MongoDBStrategy.name = "mongo";
 
-// Query the users collection
-MongoDBStrategy.prototype.query = function(query, done) {
-    var user = db.users.find(query, function(err, users){
-        done(err, [users[0]]);
-    });
-};
-
 // Get a user by id
 MongoDBStrategy.prototype.get = function(id, done) {
-    var user = db.users.findOne({_id: mongojs.ObjectId(id) } , function(err, user){
-        done(err, user);
-    });
+    User.find({ where: { id: id } }).then(function(user){ done(null, user.dataValues) });
 };
 
 // Check whether the user passed in is a valid one
 MongoDBStrategy.prototype.verifyUser = function(email, password, done) {
-    var user = db.users.findOne({ email: email }, function(err, user){
-        done(err, user);
-    });
+    User.find({ where: { email: email } }).then( function(user){ user;
+      done(null, user.dataValues);
+    })
 };
 
 module.exports = MongoDBStrategy;

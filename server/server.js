@@ -17,7 +17,7 @@ var app = express();
 var secureServer = https.createServer(credentials, app);
 var server = http.createServer(app);
 
-var models = require('./lib/models');
+var models = require('./models');
 
 app.use(protectJSON);
 app.use(express.logger());                                  // Log requests to the console
@@ -38,13 +38,13 @@ app.use(function(req, res, next) {
   next();
 });
 
-require('./lib/routes/static').addRoutes(app, config);
-require('./lib/routes/admin').addRoutes(app, config);
-require('./lib/routes/projects').addRoutes(app, config);
-require('./lib/routes/tasks').addRoutes(app, config);
-require('./lib/routes/users').addRoutes(app, config);
-require('./lib/routes/security').addRoutes(app, security);
-require('./lib/routes/appFile').addRoutes(app, config);
+require('./routes/static').addRoutes(app, config);
+require('./routes/admin').addRoutes(app);
+require('./routes/projects').addRoutes(app);
+require('./routes/tasks').addRoutes(app);
+require('./routes/users').addRoutes(app);
+require('./routes/security').addRoutes(app, security);
+require('./routes/appFile').addRoutes(app, config);
 
 // A standard error handler - it picks up any left over errors and returns a nicely formatted server 500 error
 app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));

@@ -54,11 +54,11 @@ angular.module('resources.projects').factory('Projects', function ($resource) {
   };
 
   Projects.prototype.$id = function () {
-    return this._id;
+    return this.id;
   };
 
   Projects.prototype.$remove = function (onRemove, onError) {
-    return $resource('/admin/projects/:projectId').delete( { projectId: this['_id'] }, onRemove, onError );
+    return $resource('/admin/projects/:projectId').delete( { projectId: this['id'] }, onRemove, onError );
   };
 
   return Projects;
