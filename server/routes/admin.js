@@ -32,9 +32,7 @@ exports.addRoutes = function (app, config) {
     });
 
     app.get('/admin/projects', function(req,res){
-        models.Project.findAll({}, function(users){
-            res.json(200, users );
-        })
+        models.Project.findAll({}).then(function(projects){ res.json(200, projects ); })
     });
 
     app.post('/admin/projects', function(req,res){
