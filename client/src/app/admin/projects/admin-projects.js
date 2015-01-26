@@ -1,5 +1,5 @@
 angular.module('admin-projects', [
-  'resources.projects',
+  'resources.admin-projects',
   'resources.users',
   'services.crud',
   'security.authorization'
@@ -7,22 +7,22 @@ angular.module('admin-projects', [
 
 .config(['crudRouteProvider', 'securityAuthorizationProvider', function (crudRouteProvider, securityAuthorizationProvider) {
 
-  var getAllUsers = ['Projects', 'Users', '$route', function(Projects, Users, $route){
+  var getAllUsers = ['AdminProjects', 'Users', '$route', function(AdminProjects, Users, $route){
     return Users.all();
   }];
 
   crudRouteProvider.routesFor('Projects', 'admin')
     .whenList({
-      projects: ['Projects', function(Projects) { return Projects.forUser(); }],
+      projects: ['AdminProjects', function(AdminProjects) { return AdminProjects.forUser(); }],
       adminUser: securityAuthorizationProvider.requireAdminUser
     })
     .whenNew({
-      project: ['Projects', function(Projects) { return new Projects(); }],
+      project: ['AdminProjects', function(AdminProjects) { return new AdminProjects(); }],
       users: getAllUsers,
       adminUser: securityAuthorizationProvider.requireAdminUser
     })
     .whenEdit({
-      project: ['Projects', 'Users', '$route', function(Projects, Users, $route) { return Projects.getById($route.current.params.itemId); }],
+      project: ['AdminProjects', 'Users', '$route', function(AdminProjects, Users, $route) { return AdminProjects.getById($route.current.params.itemId); }],
       users: getAllUsers,
       adminUser: securityAuthorizationProvider.requireAdminUser
     });

@@ -35,6 +35,11 @@ exports.addRoutes = function (app) {
         models.Project.findAll({}).then(function(projects){ res.json(200, projects ); })
     });
 
+    app.get('/admin/projects/:projectId', function(req,res){
+        models.Project.find({where: { id: req.params.projectId } }).then(function(project){ res.json(200, project); })
+    });
+
+
     app.post('/admin/projects', function(req,res){
         models.Project.findOrInitialize({ where: { id: req.body.id } })
             .then(function(result){
