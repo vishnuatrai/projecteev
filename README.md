@@ -1,3 +1,6 @@
+# projecteev
+Project task management system
+
 ## Installation
 
 ### Platform & tools
@@ -90,3 +93,4 @@ The app made up of a number of javascript, css and html files that need to be me
     ```
 * Browse to the application at [http://localhost:3000]
 * Login with the admin user as defined in `server/lib/initDB.js`.
+
