@@ -9,7 +9,8 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
-        // associations can be defined here
+          ProductBacklog.belongsTo(models.Project);
+          ProductBacklog.hasMany(models.SprintBacklog);
       }
     }
   });

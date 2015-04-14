@@ -11,6 +11,7 @@ module.exports = function(sequelize, DataTypes) {
       associate: function(models) {
           User.hasMany(models.ProjectTeamMember)
           User.hasMany(models.Project, { through: 'ProjectTeamMember' })
+          User.hasMany(models.Task)
       }
     }
   });
