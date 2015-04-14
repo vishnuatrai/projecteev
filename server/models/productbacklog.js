@@ -1,9 +1,9 @@
 "use strict";
 module.exports = function(sequelize, DataTypes) {
   var ProductBacklog = sequelize.define("ProductBacklog", {
-    name: DataTypes.STRING,
+    name: { type: DataTypes.STRING, allowNull: false },
     desc: DataTypes.TEXT,
-    projectId: DataTypes.INTEGER,
+    projectId: { type: DataTypes.INTEGER, allowNull: false },
     priority: DataTypes.INTEGER,
     estimation: DataTypes.INTEGER
   }, {

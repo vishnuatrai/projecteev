@@ -1,8 +1,8 @@
 "use strict";
 module.exports = function(sequelize, DataTypes) {
   var SprintBacklog = sequelize.define("SprintBacklog", {
-    sprintId: DataTypes.INTEGER,
-    productBacklogsId: DataTypes.INTEGER
+    sprintId: { type: DataTypes.INTEGER, allowNull: false },
+    productBacklogsId: { type: DataTypes.INTEGER, allowNull: false }
   }, {
     classMethods: {
       associate: function(models) {

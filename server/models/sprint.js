@@ -1,8 +1,8 @@
 "use strict";
 module.exports = function(sequelize, DataTypes) {
   var Sprint = sequelize.define("Sprint", {
-    name: DataTypes.STRING,
-    projectId: DataTypes.INTEGER,
+    name: { type: DataTypes.STRING, allowNull: false },
+    projectId: { type: DataTypes.INTEGER, allowNull: false },
     capacity: DataTypes.INTEGER,
     start: DataTypes.DATE,
     end: DataTypes.DATE
