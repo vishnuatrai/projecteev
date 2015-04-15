@@ -7,7 +7,7 @@ module.exports = function(sequelize, DataTypes) {
              validate: { isEmail: { msg: 'Email must be valid.' } }
             },
     password: { type: DataTypes.STRING, allowNull: false,
-        validate: { len: { args: 8, msg: 'Password must be at-least 8 characters.' } }
+        validate: { len: { args: [ 8, 24 ], msg: 'Password must be between 8 to 24 characters.' } }
     },
     admin: DataTypes.BOOLEAN
   }, {
