@@ -43,7 +43,7 @@ exports.addRoutes = function (app) {
     app.post('/admin/projects', function(req,res){
         models.Project.findOrInitialize({ where: { id: req.body.id } })
             .then(function(result){
-                result[0].updateAttributes( req.body )
+                result[0].updateAttributes( req.body).then( function(project){ project.setUsers(req.body['teamMembers']); });
             })
             .then(function(project){ res.json(200, project); })
     });
