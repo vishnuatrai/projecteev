@@ -14,6 +14,12 @@ module.exports = function(sequelize, DataTypes) {
           Project.hasMany(models.Sprint)
           Project.hasMany(models.Task)
       }
+    },
+
+    instanceMethods: {
+        teamMembers: function(){
+            return this.getUsers();
+        }
     }
   });
   return Project;
