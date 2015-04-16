@@ -14,7 +14,7 @@ exports.addRoutes = function (app) {
   });
 
   app.get('/projects/:projectId/team_members', function(req,res){
-      models.User.findAll( { join: [{model: models.ProjectTeamMember, where: { projectId: req.params.projectId }}]} ).then(function(users){
+      models.User.findAll( { include: [{model: models.ProjectTeamMember, attributes: [], where: { projectId: req.params.projectId }}]} ).then(function(users){
           res.json(200, users);
       })
   });

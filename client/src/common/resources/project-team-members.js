@@ -10,6 +10,7 @@ angular.module('resources.project-team-members').factory('ProjectTeamMembers', f
         return this.lastName + " " + this.firstName + " (" + this.email + ")";
     };
 
+
     ProjectTeamMembers.prototype.$id = function () {
         return this.id;
     };

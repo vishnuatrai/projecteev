@@ -24,6 +24,7 @@ angular.module('admin-projects', [
     .whenNew({
       project: ['AdminProjects', function(AdminProjects) { return new AdminProjects(); }],
       users: getAllUsers,
+      teamMembers: function() { return []; },
       adminUser: securityAuthorizationProvider.requireAdminUser
     })
     .whenEdit({
@@ -63,6 +64,12 @@ angular.module('admin-projects', [
 }])
 
 .controller('TeamMembersController', ['$scope', function($scope) {
+
+        var teamMembers = [];
+        angular.forEach($scope.project.teamMembers, function(value, key) {
+            teamMembers.push(value.$id());
+        });
+        $scope.project.teamMembers = teamMembers;
 
   //prepare users lookup, just keep references for easier lookup
   $scope.usersLookup = {};
