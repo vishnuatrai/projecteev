@@ -1,5 +1,6 @@
 angular.module('admin-projects', [
   'resources.admin-projects',
+  'resources.project-team-members',
   'resources.users',
   'services.crud',
   'security.authorization'
@@ -9,6 +10,10 @@ angular.module('admin-projects', [
 
   var getAllUsers = ['AdminProjects', 'Users', '$route', function(AdminProjects, Users, $route){
     return Users.all();
+  }];
+
+  var getTeamMembers = ['ProjectTeamMembers', '$route', function(ProjectTeamMembers, $route){
+      return ProjectTeamMembers.forProject($route.current.params.itemId).$promise.then(function(r){ return r; });
   }];
 
   crudRouteProvider.routesFor('Projects', 'admin')
@@ -22,8 +27,9 @@ angular.module('admin-projects', [
       adminUser: securityAuthorizationProvider.requireAdminUser
     })
     .whenEdit({
-      project: ['AdminProjects', 'Users', '$route', function(AdminProjects, Users, $route) { return AdminProjects.getById($route.current.params.itemId); }],
+      project: ['AdminProjects', '$route', function(AdminProjects, $route) { return AdminProjects.getById($route.current.params.itemId); }],
       users: getAllUsers,
+      teamMembers: getTeamMembers,
       adminUser: securityAuthorizationProvider.requireAdminUser
     });
 }])
@@ -56,7 +62,7 @@ angular.module('admin-projects', [
 }])
 
 .controller('TeamMembersController', ['$scope', function($scope) {
-  $scope.project.teamMembers = $scope.project.getTeamMembers() || [];
+  $scope.project.teamMembers = $scope.teamMembers || [];
 
   //prepare users lookup, just keep references for easier lookup
   $scope.usersLookup = {};
