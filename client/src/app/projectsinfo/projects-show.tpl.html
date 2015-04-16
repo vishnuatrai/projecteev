@@ -11,11 +11,6 @@
             <span>{{ project.scrumMasterFullName() }}</span>
             <label><strong>Development Team</strong></label>
             <table class="table table-bordered table-condensed table-striped table-hover">
-                <thead>
-                <tr>
-                    <th colspan="2">User</th>
-                </tr>
-                </thead>
                 <tbody>
                 <tr ng-repeat="userId in project.teamMembers">
                     <td>{{ usersLookup[userId].getFullName() }}</td>

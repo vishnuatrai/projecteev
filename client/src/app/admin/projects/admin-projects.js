@@ -65,11 +65,11 @@ angular.module('admin-projects', [
 
 .controller('TeamMembersController', ['$scope', function($scope) {
 
-        var teamMembers = [];
-        angular.forEach($scope.project.teamMembers, function(value, key) {
-            teamMembers.push(value.$id());
-        });
-        $scope.project.teamMembers = teamMembers;
+    var teamMembers = [];
+    angular.forEach($scope.project.teamMembers, function(value, key) {
+        teamMembers.push(value.$id());
+    });
+    $scope.project.teamMembers = teamMembers;
 
   //prepare users lookup, just keep references for easier lookup
   $scope.usersLookup = {};

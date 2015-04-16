@@ -19,8 +19,10 @@ angular.module('projectsinfo', [], ['$routeProvider', function($routeProvider){
             }],
             users:['$route', 'Users', function ($route, Users) {
                 return Users.all().$promise.then(function(r){ return r; });
+            }],
+            teamMembers: ['ProjectTeamMembers', '$route', function(ProjectTeamMembers, $route){
+                return ProjectTeamMembers.forProject($route.current.params.projectId).$promise.then(function(r){ return r; });
             }]
-
         }
 
       });
@@ -36,10 +38,11 @@ angular.module('projectsinfo').controller('ProjectsInfoListCtrl', ['$scope', '$l
 
 }]);
 
-angular.module('projectsinfo').controller('ProjectsShowCtrl', ['$scope', '$location', 'project', 'users', function($scope, $location, project, users) {
+angular.module('projectsinfo').controller('ProjectsShowCtrl', ['$scope', '$location', 'project', 'users', 'teamMembers', function($scope, $location, project, users, teamMembers) {
 
     $scope.project = project;
     $scope.users = users;
+    $scope.project.teamMembers = teamMembers || [];
 
     //prepare users lookup, just keep references for easier lookup
     $scope.usersLookup = {};
@@ -61,6 +64,10 @@ angular.module('projectsinfo').controller('ProjectsShowCtrl', ['$scope', '$locat
 
 }])
 .controller('TeamMembersController', ['$scope', function($scope) {
-    $scope.project.teamMembers = $scope.project.teamMembers || [];
+    var teamMembers = [];
+    angular.forEach($scope.project.teamMembers, function(value, key) {
+        teamMembers.push(value.$id());
+    });
+    $scope.project.teamMembers = teamMembers;
 
 }]);
