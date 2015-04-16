@@ -13,6 +13,12 @@ exports.addRoutes = function (app) {
     })
   });
 
+  app.get('/projects/:projectId/team_members', function(req,res){
+      models.User.findAll( {include: [{model: models.ProjectTeamMember, where: { projectId: req.params.projectId }}]} ).then(function(users){
+          res.json(200, users);
+      })
+  });
+
   app.get('/projects/:projectId/productbacklog', function(req,res){
     models.ProductBacklog.findAll({ where: { projectId: req.params.projectId }}).then(function(product_backlogs){
       res.json(200, product_backlogs);

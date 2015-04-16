@@ -1,5 +1,5 @@
-angular.module('resources.admin-projects', []);
-angular.module('resources.admin-projects').factory('AdminProjects', function ($resource) {
+angular.module('resources.admin-projects', [ 'resources.project-team-members' ]);
+angular.module('resources.admin-projects').factory('AdminProjects', [ '$resource', 'ProjectTeamMembers', function ($resource,ProjectTeamMembers) {
 
   var AdminProjects = $resource('/admin/projects');
 
@@ -32,6 +32,10 @@ angular.module('resources.admin-projects').factory('AdminProjects', function ($r
     return !this.isProductOwner(userId);
   };
 
+  AdminProjects.prototype.getTeamMembers = function () {
+     return ProjectTeamMembers.forProject(this.id).$promise.then(function(result){ return result; });
+  };
+
     AdminProjects.prototype.getRoles = function (userId) {
     var roles = [];
     if (this.isProductOwner(userId)) {
@@ -62,4 +66,4 @@ angular.module('resources.admin-projects').factory('AdminProjects', function ($r
   };
 
   return AdminProjects;
-});
+}]);

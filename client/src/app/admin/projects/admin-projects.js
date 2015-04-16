@@ -56,7 +56,7 @@ angular.module('admin-projects', [
 }])
 
 .controller('TeamMembersController', ['$scope', function($scope) {
-  $scope.project.teamMembers = $scope.project.teamMembers || [];
+  $scope.project.teamMembers = $scope.project.getTeamMembers() || [];
 
   //prepare users lookup, just keep references for easier lookup
   $scope.usersLookup = {};

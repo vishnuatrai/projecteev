@@ -36,10 +36,7 @@ exports.addRoutes = function (app) {
     });
 
     app.get('/admin/projects/:projectId', function(req,res){
-        models.Project.find({where: { id: req.params.projectId } }).then(function(project){
-            project['dataValues']['teamMembers'] = project.teamMembers().then(function(users){ return users; });
-            return project;
-        }).then(function(project){ res.json(200, project); })
+        models.Project.find({where: { id: req.params.projectId } }).then(function(project){ res.json(200, project); })
     });
 
 
