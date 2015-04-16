@@ -18,7 +18,7 @@ angular.module('projectsinfo', [], ['$routeProvider', function($routeProvider){
                 return Projects.getById($route.current.params.projectId);
             }],
             users:['$route', 'Users', function ($route, Users) {
-                return Users.all();
+                return Users.all().$promise.then(function(r){ return r; });
             }]
 
         }

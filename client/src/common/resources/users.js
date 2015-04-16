@@ -25,9 +25,7 @@ angular.module('resources.users').factory('Users', function ($resource) {
   };
 
   userResource.all = function (params) {
-      return userResource.query(params).$promise.then(
-          function( result ){  return result; }
-      )
+      return userResource.query(params);
   };
 
   userResource.getById = function (userId) {

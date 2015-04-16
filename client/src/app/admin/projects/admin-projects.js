@@ -9,7 +9,7 @@ angular.module('admin-projects', [
 .config(['crudRouteProvider', 'securityAuthorizationProvider', function (crudRouteProvider, securityAuthorizationProvider) {
 
   var getAllUsers = ['AdminProjects', 'Users', '$route', function(AdminProjects, Users, $route){
-    return Users.all();
+    return Users.all().$promise.then(function(r){ return r; });
   }];
 
   var getTeamMembers = ['ProjectTeamMembers', '$route', function(ProjectTeamMembers, $route){
