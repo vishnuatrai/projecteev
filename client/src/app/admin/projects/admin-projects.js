@@ -40,10 +40,11 @@ angular.module('admin-projects', [
   angular.extend($scope, crudListMethods('/admin/projects'));
 }])
 
-.controller('ProjectsEditCtrl', ['$scope', '$location', 'i18nNotifications', 'users', 'project', function($scope, $location, i18nNotifications, users, project) {
+.controller('ProjectsEditCtrl', ['$scope', '$location', 'i18nNotifications', 'users', 'project', 'teamMembers', function($scope, $location, i18nNotifications, users, project, teamMembers) {
 
   $scope.project = project;
   $scope.users = users;
+  $scope.project.teamMembers = teamMembers || [];
 
   $scope.onSave = function(project) {
     i18nNotifications.pushForNextRoute('crud.project.save.success', 'success', {id : project['id']});
@@ -62,7 +63,6 @@ angular.module('admin-projects', [
 }])
 
 .controller('TeamMembersController', ['$scope', function($scope) {
-  $scope.project.teamMembers = $scope.teamMembers || [];
 
   //prepare users lookup, just keep references for easier lookup
   $scope.usersLookup = {};
