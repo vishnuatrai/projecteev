@@ -14,7 +14,7 @@ angular.module('resources.tasks').factory('Tasks', function ($resource) {
   };
 
   Tasks.forUser = function (userId) {
-    return Tasks.query({userId:userId});
+    return $resource('/tasks').query({ userId:userId });
   };
 
   Tasks.forProject = function (projectId) {

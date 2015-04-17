@@ -2,7 +2,7 @@ var models = require('../models');
 exports.addRoutes = function (app) {
 
   app.get('/tasks', function(req,res){
-      models.Task.findAll({where: { userId: req.params.userId}}).then(function(tasks){
+      models.Task.findAll({ where: { userId: req.params.userId} }).then(function(tasks){
           res.json(200, tasks);
       });
   });

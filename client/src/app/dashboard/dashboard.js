@@ -11,7 +11,7 @@ angular.module('dashboard', ['resources.projects', 'resources.tasks'])
       }],
       tasks:['Tasks', function (Tasks) {
         //TODO: need to know the current user here
-        return Tasks.all();
+        return Tasks.forUser().$promise.then(function(r){ return r; });
       }]
     }
   });
