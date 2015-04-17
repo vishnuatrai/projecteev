@@ -11,7 +11,7 @@ module.exports = {
       sprintId: {
         type: DataTypes.INTEGER
       },
-      productBacklogsId: {
+      productBacklogId: {
         type: DataTypes.INTEGER
       },
       createdAt: {

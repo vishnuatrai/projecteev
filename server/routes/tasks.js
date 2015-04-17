@@ -2,15 +2,15 @@ var models = require('../models');
 exports.addRoutes = function (app) {
 
   app.get('/tasks', function(req,res){
-      Task.byUser(req.user._id, function(users){
-          res.json(200, users );
-      })
+      models.Task.findAll({where: { userId: req.params.userId}}).then(function(tasks){
+          res.json(200, tasks);
+      });
   });
 
   app.delete('/tasks/:taskId', function(req,res){
-    Task.delete(req.params.taskId, function(){
+      models.Task.destroy({where: { id: req.params.taskId}}).then(function(result){
       res.json(200, {});
-    })
+    });
   });
 
 };

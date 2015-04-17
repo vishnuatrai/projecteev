@@ -1,4 +1,4 @@
-angular.module('sprints', ['resources.sprints', 'services.crud', 'tasks'])
+angular.module('sprints', ['resources.sprints', 'resources.sprint-backlog', 'services.crud', 'tasks'])
 
 .config(['crudRouteProvider', function(crudRouteProvider){
 
@@ -8,6 +8,10 @@ angular.module('sprints', ['resources.sprints', 'services.crud', 'tasks'])
 
   var productBacklog = ['$route', 'ProductBacklog', function ($route, ProductBacklog) {
     return ProductBacklog.forProject($route.current.params.projectId);
+  }];
+
+  var getSprintBacklogs= ['SprintBacklogs', '$route', function(SprintBacklogs, $route){
+    return SprintBacklogs.forSprint( $route.current.params.projectId, $route.current.params.itemId).$promise.then(function(r){ return r; });
   }];
 
   crudRouteProvider.routesFor('Sprints', 'projects', 'projects/:projectId')
@@ -23,7 +27,8 @@ angular.module('sprints', ['resources.sprints', 'services.crud', 'tasks'])
     sprint: ['$route', 'Sprints', function($route, Sprints){
       return new Sprints({projectId:$route.current.params.projectId});
     }],
-    productBacklog : productBacklog
+    productBacklog : productBacklog,
+    sprintBacklog: function() { return []; }
   })
 
   .whenEdit({
@@ -31,7 +36,8 @@ angular.module('sprints', ['resources.sprints', 'services.crud', 'tasks'])
     sprint: ['$route', 'Sprints', function($route, Sprints){
       return Sprints.getById(projectId,$route.current.params.itemId);
     }],
-    productBacklog : productBacklog
+    productBacklog : productBacklog,
+    sprintBacklog: getSprintBacklogs
   });
 
 }])
@@ -46,10 +52,16 @@ angular.module('sprints', ['resources.sprints', 'services.crud', 'tasks'])
   };
 }])
 
-.controller('SprintsEditCtrl', ['$scope', '$location', 'projectId', 'sprint', 'productBacklog', function($scope, $location, projectId, sprint, productBacklog){
+.controller('SprintsEditCtrl', ['$scope', '$location', 'projectId', 'sprint', 'productBacklog', 'sprintBacklog', function($scope, $location, projectId, sprint, productBacklog, sprintBacklog){
 
   $scope.productBacklog = productBacklog;
   $scope.sprint = sprint;
+
+  var backlogs = [];
+  angular.forEach(sprintBacklog, function(value, key) {
+      backlogs.push(value.$id());
+  });
+  $scope.sprint.sprintBacklog = backlogs;
 
   $scope.onSave = function () {
     $location.path('/projects/'+projectId+'/sprints');
@@ -57,8 +69,7 @@ angular.module('sprints', ['resources.sprints', 'services.crud', 'tasks'])
   $scope.onError = function () {
     $scope.updateError = true;
   };
-  
-  $scope.sprint.sprintBacklog = $scope.sprint.sprintBacklog || [];
+
 
   $scope.productBacklogLookup = {};
   angular.forEach($scope.productBacklog, function (productBacklogItem) {

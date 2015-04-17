@@ -51,7 +51,9 @@ exports.addRoutes = function (app) {
 
   app.post('/projects/:projectId/sprints', function(req,res){
     models.Sprint.findOrInitialize({ where: { id: req.body.id } })
-      .then(function(result){ result[0].updateAttributes( req.body ) })
+      .then(function(result){
+            result[0].updateAttributes( req.body).then( function(sprint){ sprint.setSprintBacklogs(req.body['sprintBacklog']); });
+        })
       .then(function(sprint){ res.json(200, sprint); })
   });
 
@@ -64,6 +66,12 @@ exports.addRoutes = function (app) {
   app.delete('/projects/:projectId/sprints/:sprintId', function(req,res){
     models.Sprint.destroy({where: { id: req.params.sprintId}}).then(function(result){
       res.json(200, {});
+    })
+  });
+
+  app.get('/projects/:projectId/sprints/:sprintId/sprint_backlogs', function(req,res){
+    models.ProductBacklog.findAll( { include: [{ model: models.SprintBacklog, attributes: [], where: { sprintId: req.params.sprintId }}]} ).then(function(backlogs){
+      res.json(200, backlogs);
     })
   });
 
