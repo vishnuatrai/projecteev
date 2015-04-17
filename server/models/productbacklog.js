@@ -11,6 +11,7 @@ module.exports = function(sequelize, DataTypes) {
       associate: function(models) {
           ProductBacklog.belongsTo(models.Project);
           ProductBacklog.hasMany(models.SprintBacklog);
+          ProductBacklog.hasMany(models.Sprint, { through: 'SprintBacklogs' })
       }
     }
   });

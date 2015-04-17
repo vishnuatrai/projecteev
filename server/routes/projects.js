@@ -52,7 +52,7 @@ exports.addRoutes = function (app) {
   app.post('/projects/:projectId/sprints', function(req,res){
     models.Sprint.findOrInitialize({ where: { id: req.body.id } })
       .then(function(result){
-            result[0].updateAttributes( req.body).then( function(sprint){ sprint.setSprintBacklogs(req.body['sprintBacklog']); });
+            result[0].updateAttributes( req.body).then( function(sprint){ sprint.setProductBacklogs(req.body['sprintBacklog']); });
         })
       .then(function(sprint){ res.json(200, sprint); })
   });

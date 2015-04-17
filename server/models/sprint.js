@@ -12,6 +12,7 @@ module.exports = function(sequelize, DataTypes) {
           Sprint.belongsTo(models.Project);
           Sprint.hasMany(models.Task);
           Sprint.hasMany(models.SprintBacklog);
+          Sprint.hasMany(models.ProductBacklog, { through: 'SprintBacklogs'} )
       }
     }
   });

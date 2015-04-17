@@ -7,7 +7,7 @@ angular.module('sprints', ['resources.sprints', 'resources.sprint-backlog', 'ser
   }];
 
   var productBacklog = ['$route', 'ProductBacklog', function ($route, ProductBacklog) {
-    return ProductBacklog.forProject($route.current.params.projectId);
+    return ProductBacklog.forProject($route.current.params.projectId).$promise.then(function(r){ return r; });
   }];
 
   var getSprintBacklogs= ['SprintBacklogs', '$route', function(SprintBacklogs, $route){
