@@ -8,10 +8,10 @@ module.exports = {
         primaryKey: true,
         type: DataTypes.INTEGER
       },
-      projectId: {
+      ProjectId: {
         type: DataTypes.INTEGER
       },
-      userId: {
+      UserId: {
         type: DataTypes.INTEGER
       },
       createdAt: {

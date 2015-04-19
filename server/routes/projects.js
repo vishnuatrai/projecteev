@@ -14,13 +14,13 @@ exports.addRoutes = function (app) {
   });
 
   app.get('/projects/:projectId/team_members', function(req,res){
-      models.User.findAll( { include: [{model: models.ProjectTeamMember, attributes: [], where: { projectId: req.params.projectId }}]} ).then(function(users){
+      models.User.findAll( { include: [{model: models.ProjectTeamMember, attributes: [], where: { ProjectId: req.params.projectId }}]} ).then(function(users){
           res.json(200, users);
       })
   });
 
   app.get('/projects/:projectId/productbacklog', function(req,res){
-    models.ProductBacklog.findAll({ where: { projectId: req.params.projectId }}).then(function(product_backlogs){
+    models.ProductBacklog.findAll({ where: { ProjectId: req.params.projectId }}).then(function(product_backlogs){
       res.json(200, product_backlogs);
     })
   });
@@ -44,7 +44,7 @@ exports.addRoutes = function (app) {
   });
 
   app.get('/projects/:projectId/sprints', function(req,res){
-    models.Sprint.findAll({ where: { projectId: req.params.projectId } }).then(function(sprints){
+    models.Sprint.findAll({ where: { ProjectId: req.params.projectId } }).then(function(sprints){
       res.json(200, sprints);
     })
   });
@@ -70,13 +70,13 @@ exports.addRoutes = function (app) {
   });
 
   app.get('/projects/:projectId/sprints/:sprintId/sprint_backlogs', function(req,res){
-    models.ProductBacklog.findAll( { include: [{ model: models.SprintBacklog, attributes: [], where: { sprintId: req.params.sprintId }}]} ).then(function(backlogs){
+    models.ProductBacklog.findAll( { include: [{ model: models.SprintBacklog, attributes: [], where: { SprintId: req.params.sprintId }}]} ).then(function(backlogs){
       res.json(200, backlogs);
     })
   });
 
   app.get('/projects/:projectId/sprints/:sprintId/tasks', function(req,res){
-      models.Task.findAll({ where: { sprintId: req.params.sprintId } }).then(function(tasks){
+      models.Task.findAll({ where: { SprintId: req.params.sprintId } }).then(function(tasks){
       res.json(200, tasks);
     })
   });

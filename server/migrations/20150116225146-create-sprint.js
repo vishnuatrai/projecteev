@@ -11,7 +11,7 @@ module.exports = {
       name: {
         type: DataTypes.STRING
       },
-      projectId: {
+      ProjectId: {
         type: DataTypes.INTEGER
       },
       capacity: {

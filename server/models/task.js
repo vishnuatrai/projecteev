@@ -1,15 +1,15 @@
 "use strict";
 module.exports = function(sequelize, DataTypes) {
   var Task = sequelize.define("Task", {
-    projectId: { type: DataTypes.INTEGER, allowNull: false },
-    sprintId: { type: DataTypes.INTEGER, allowNull: false },
+    ProjectId: { type: DataTypes.INTEGER, allowNull: false },
+    SprintId: { type: DataTypes.INTEGER, allowNull: false },
     state: DataTypes.STRING,
     name: { type: DataTypes.STRING, allowNull: false },
-    productBacklogId: { type: DataTypes.INTEGER, allowNull: false },
+    ProductBacklogId: { type: DataTypes.INTEGER, allowNull: false },
     desc: DataTypes.TEXT,
     estimation: DataTypes.INTEGER,
     remaining: DataTypes.INTEGER,
-    userId: { type: DataTypes.INTEGER, allowNull: false }
+    UserId: { type: DataTypes.INTEGER, allowNull: false }
   }, {
     classMethods: {
       associate: function(models) {

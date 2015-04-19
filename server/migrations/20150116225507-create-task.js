@@ -8,10 +8,10 @@ module.exports = {
         primaryKey: true,
         type: DataTypes.INTEGER
       },
-      projectId: {
+      ProjectId: {
         type: DataTypes.INTEGER
       },
-      sprintId: {
+      SprintId: {
         type: DataTypes.INTEGER
       },
       state: {
@@ -20,7 +20,7 @@ module.exports = {
       name: {
         type: DataTypes.STRING
       },
-      productBacklogId: {
+      ProductBacklogId: {
         type: DataTypes.INTEGER
       },
       desc: {
@@ -32,7 +32,7 @@ module.exports = {
       remaining: {
         type: DataTypes.INTEGER
       },
-      userId: {
+      UserId: {
         type: DataTypes.INTEGER
       },
       createdAt: {

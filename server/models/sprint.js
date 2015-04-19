@@ -2,7 +2,7 @@
 module.exports = function(sequelize, DataTypes) {
   var Sprint = sequelize.define("Sprint", {
     name: { type: DataTypes.STRING, allowNull: false },
-    projectId: { type: DataTypes.INTEGER, allowNull: false },
+    ProjectId: { type: DataTypes.INTEGER, allowNull: false },
     capacity: DataTypes.INTEGER,
     start: DataTypes.DATE,
     end: DataTypes.DATE

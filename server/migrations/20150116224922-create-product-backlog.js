@@ -14,7 +14,7 @@ module.exports = {
       desc: {
         type: DataTypes.TEXT
       },
-      projectId: {
+      ProjectId: {
         type: DataTypes.INTEGER
       },
       priority: {

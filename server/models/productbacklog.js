@@ -3,7 +3,7 @@ module.exports = function(sequelize, DataTypes) {
   var ProductBacklog = sequelize.define("ProductBacklog", {
     name: { type: DataTypes.STRING, allowNull: false },
     desc: DataTypes.TEXT,
-    projectId: { type: DataTypes.INTEGER, allowNull: false },
+    ProjectId: { type: DataTypes.INTEGER, allowNull: false },
     priority: DataTypes.INTEGER,
     estimation: DataTypes.INTEGER
   }, {

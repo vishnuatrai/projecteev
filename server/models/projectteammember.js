@@ -1,8 +1,8 @@
 "use strict";
 module.exports = function(sequelize, DataTypes) {
   var ProjectTeamMember = sequelize.define("ProjectTeamMember", {
-    projectId: { type: DataTypes.INTEGER, allowNull: false },
-    userId: { type: DataTypes.INTEGER, allowNull: false }
+    ProjectId: { type: DataTypes.INTEGER, allowNull: false },
+    UserId: { type: DataTypes.INTEGER, allowNull: false }
   }, {
     classMethods: {
       associate: function(models) {

@@ -8,10 +8,10 @@ module.exports = {
         primaryKey: true,
         type: DataTypes.INTEGER
       },
-      sprintId: {
+      SprintId: {
         type: DataTypes.INTEGER
       },
-      productBacklogId: {
+      ProductBacklogId: {
         type: DataTypes.INTEGER
       },
       createdAt: {
