@@ -38,6 +38,33 @@ app.use(function(req, res, next) {
   next();
 });
 
+// For postgresql sequelize adaptor middleware
+app.use(function(req, res, next) {
+
+    if(req.body['userId']){
+        req.body['UserId'] = req.body['userId']
+    }
+
+    if(req.body['projectId']){
+        req.body['ProjectId'] = req.body['projectId']
+    }
+
+    if(req.body['sprintId']){
+        req.body['SprintId'] = req.body['sprintId']
+    }
+
+    if(req.body['productBacklogId']){
+        req.body['ProductBacklogId'] = req.body['productBacklogId']
+    }
+
+    if(req.body['taskId']){
+        req.body['TaskId'] = req.body['taskId']
+    }
+
+    next();
+});
+// end of middleware
+
 require('./routes/static').addRoutes(app, config);
 require('./routes/admin').addRoutes(app);
 require('./routes/projects').addRoutes(app);
