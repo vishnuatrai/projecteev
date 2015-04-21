@@ -65,13 +65,7 @@ app.use(function(req, res, next) {
 });
 // end of middleware
 
-require('./server/routes/static').addRoutes(app, config);
-require('./server/routes/admin').addRoutes(app);
-require('./server/routes/projects').addRoutes(app);
-require('./server/routes/tasks').addRoutes(app);
-require('./server/routes/users').addRoutes(app);
-require('./server/routes/security').addRoutes(app, security);
-require('./server/routes/appFile').addRoutes(app, config);
+require('./server/routes')(app);
 
 // A standard error handler - it picks up any left over errors and returns a nicely formatted server 500 error
 app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
