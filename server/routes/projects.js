@@ -2,7 +2,7 @@ var models = require('../models');
 exports.addRoutes = function (app) {
 
   app.get('/projectsinfo', function(req,res){
-    models.Project.findAll({ where: { productOwner: req.user.id } }).then(function(projects){
+    models.Project.findAll({ where: { productOwner: (req.user||{})['id'] } }).then(function(projects){
       res.json(200, projects );
     });
   });
