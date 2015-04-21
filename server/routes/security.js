@@ -1,4 +1,5 @@
-exports.addRoutes = function(app, security) {
+var security = require('./../lib/security');
+exports.addRoutes = function(app) {
 
 app.post('/login', security.login);
 app.post('/logout', security.logout);

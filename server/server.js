@@ -68,13 +68,13 @@ app.use(function(req, res, next) {
 // A standard error handler - it picks up any left over errors and returns a nicely formatted server 500 error
 app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 
-require('./routes/static').addRoutes(app, config);
+require('./routes/static').addRoutes(app);
 require('./routes/admin').addRoutes(app);
 require('./routes/projects').addRoutes(app);
 require('./routes/tasks').addRoutes(app);
 require('./routes/users').addRoutes(app);
-require('./routes/security').addRoutes(app, security);
-require('./routes/appFile').addRoutes(app, config);
+require('./routes/security').addRoutes(app);
+require('./routes/appFile').addRoutes(app);
 
 // Start up the server on the port specified in the config
 server.listen(config.server.listenPort, '0.0.0.0', 511, function() {
