@@ -1,7 +1,6 @@
 var express = require('express');
 var passport = require('passport');
 var MongoStrategy = require('./mongo-strategy');
-var app = express();
 
 var filterUser = function(user) {
   if ( user ) {

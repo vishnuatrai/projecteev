@@ -1,10 +1,7 @@
-var config = require('./../config');
 var util = require('util');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-var rest = require('request');
 var models  = require('../models');
-var User = models.User;
 
 function MongoDBStrategy() {
 
@@ -31,12 +28,12 @@ MongoDBStrategy.name = "mongo";
 
 // Get a user by id
 MongoDBStrategy.prototype.get = function(id, done) {
-    User.find({ where: { id: id } }).then(function(user){ done(null, user.dataValues) });
+    models.User.find({ where: { id: id } }).then(function(user){ done(null, user.dataValues) });
 };
 
 // Check whether the user passed in is a valid one
 MongoDBStrategy.prototype.verifyUser = function(email, password, done) {
-    User.find({ where: { email: email } }).then( function(user){ user;
+    models.User.find({ where: { email: email } }).then( function(user){ user;
       done(null, user.dataValues);
     })
 };
