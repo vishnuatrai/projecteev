@@ -78,12 +78,8 @@ server.listen(config.server.listenPort, '0.0.0.0', 511, function() {
   //open('http://localhost:' + config.server.listenPort + '/');
 });
 
-var listenPort = app.get('port') || config.server.securePort;
-console.log('Angular App Server - listening on port: ' + listenPort);
-secureServer.listen(listenPort, function(){
-    console.log('Express server listening on port ' + listenPort);
+secureServer.listen(app.get('port'), function(){
+    console.log('Express server listening on port ' + app.get('port'));
 });
-
-console.log('Angular App Server - listening on secure port: ' + config.server.securePort);
 
 console.log(app.routes);
