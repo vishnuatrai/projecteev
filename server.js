@@ -71,14 +71,7 @@ app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 require('./routes')(app);
 
 
-// Start up the server on the port specified in the config
-server.listen(config.server.listenPort, '0.0.0.0', 511, function() {
-  // // Once the server is listening we automatically open up a browser
-  var open = require('open');
-  //open('http://localhost:' + config.server.listenPort + '/');
-});
-
-secureServer.listen(app.get('port'), function(){
+server.listen(app.get('port'), function(){
     console.log('Express server listening on port ' + app.get('port'));
 });
 
