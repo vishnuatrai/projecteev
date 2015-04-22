@@ -77,9 +77,11 @@ server.listen(config.server.listenPort, '0.0.0.0', 511, function() {
   var open = require('open');
   //open('http://localhost:' + config.server.listenPort + '/');
 });
-console.log('Angular App Server - listening on port: ' + config.server.listenPort);
-secureServer.listen(app.get('port'), function(){
-    console.log('Express server listening on port ' + app.get('port'));
+
+var listenPort = app.get('port') || config.server.securePort;
+console.log('Angular App Server - listening on port: ' + listenPort);
+secureServer.listen(listenPort, function(){
+    console.log('Express server listening on port ' + listenPort);
 });
 
 console.log('Angular App Server - listening on secure port: ' + config.server.securePort);
