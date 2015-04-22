@@ -14,7 +14,6 @@ var protectJSON = require('./lib/protectJSON');
 require('express-namespace');
 
 var app = express();
-var secureServer = https.createServer(credentials, app);
 var server = http.createServer(app);
 
 var models = require('./models');
@@ -71,8 +70,8 @@ app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 require('./routes')(app);
 
 
-server.listen(app.get('port'), function(){
-    console.log('Express server listening on port ' + app.get('port'));
+server.listen(process.env.PORT, function(){
+    console.log('Express server listening on port ' + process.env.PORT);
 });
 
 console.log(app.routes);
