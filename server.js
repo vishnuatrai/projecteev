@@ -75,7 +75,7 @@ require('./routes')(app);
 server.listen(config.server.listenPort, '0.0.0.0', 511, function() {
   // // Once the server is listening we automatically open up a browser
   var open = require('open');
-  open('http://localhost:' + config.server.listenPort + '/');
+  //open('http://localhost:' + config.server.listenPort + '/');
 });
 console.log('Angular App Server - listening on port: ' + config.server.listenPort);
 secureServer.listen(config.server.securePort);
