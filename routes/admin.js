@@ -25,12 +25,6 @@ exports.addRoutes = function (app) {
         })
     });
 
-    app.get('/admin/projects/users', function(req,res){
-        models.User.findAll({}, function(users){
-            res.json(200, users );
-        })
-    });
-
     app.get('/admin/projects', function(req,res){
         models.Project.findAll({}).then(function(projects){ res.json(200, projects ); })
     });
