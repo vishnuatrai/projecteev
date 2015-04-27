@@ -19,6 +19,7 @@ var config = require('./config.js');
 var passport = require('passport');
 var security = require('./lib/security');
 var xsrf = require('./lib/xsrf');
+var protectJSON = require('./lib/protectJSON');
 require('express-namespace');
 
 var app = express();
@@ -26,6 +27,7 @@ var app = express();
 // all environments
 app.set('port', process.env.PORT || 3000);
 
+app.use(protectJSON);
 app.use(compression());
 app.use(favicon(config.server.distFolder + '/favicon.ico'));
 app.use(logger('dev'));
