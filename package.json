@@ -1,25 +1,36 @@
 {
-  "name": "angular-app-server",
-  "description": "Back end server to support our angular app",
-  "version": "0.0.1",
-  "private": true,
-  "dependencies": {
-    "express": "~3.0",
-    "express-namespace": "~0.1.1",
-    "open": "0.0.3",
-    "passport": "~0.1.12",
-    "passport-local": "~0.1.6",
-    "pg": "^4.2.0",
-    "pg-hstore": "*",
-    "request": "~2.16.6",
-    "sequelize": "^2.0.0-rc7",
-    "sequelize-cli": "^1.0.3"
-  },
-  "devDependencies": {
-    "grunt": "~0.4",
-    "grunt-contrib-jshint": "~0.2.0",
-    "grunt-contrib-nodeunit": "~0.1.2",
-    "rewire": "^2.0.1",
-    "supervisor": "~0.4.1"
-  }
+    "name": "projecteev-app-server",
+    "description": "Back end server to support our angular app",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+        "start": "node app.js"
+    },
+    "dependencies": {
+        "body-parser": "^1.5.2",
+        "errorhandler": "^1.1.1",
+        "express": "~4.12.3",
+        "express-session": "^1.7.2",
+        "method-override": "^2.1.2",
+        "morgan": "^1.2.2",
+        "multer": "^0.1.3",
+        "serve-favicon": "^2.0.1",
+        "compression": "~1.4.2",
+        "express-namespace": "~0.1.1",
+        "open": "0.0.3",
+        "passport": "~0.1.12",
+        "passport-local": "~0.1.6",
+        "pg": "^4.2.0",
+        "pg-hstore": "*",
+        "request": "~2.16.6",
+        "sequelize": "^2.0.0-rc7",
+        "sequelize-cli": "^1.0.3"
+    },
+    "devDependencies": {
+        "grunt": "~0.4",
+        "grunt-contrib-jshint": "~0.2.0",
+        "grunt-contrib-nodeunit": "~0.1.2",
+        "rewire": "^2.0.1",
+        "supervisor": "~0.4.1"
+    }
 }
