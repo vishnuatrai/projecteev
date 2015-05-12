@@ -27,6 +27,7 @@
         "sequelize-cli": "^1.0.3"
     },
     "devDependencies": {
+        "bower": "~1.4.1",
         "grunt": "~0.4",
         "grunt-contrib-jshint": "~0.2.0",
         "grunt-contrib-nodeunit": "~0.1.2",

@@ -1,0 +1,24 @@
+{
+  "name": "projecteev",
+  "version": "0.0.0",
+  "homepage": "https://github.com/vatrai/projecteev",
+  "authors": [
+    "Vishnu Atrai <me@vishnuatrai.com>"
+  ],
+  "description": "project management tool",
+  "main": "index.html",
+  "license": "MIT",
+  "directory": "client/vendor",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/assets",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "angular.js": "v1.4.0-rc.1"
+  }
+}
