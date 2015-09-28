@@ -1,30 +1,30 @@
-"use strict";
+'use strict';
 module.exports = {
-  up: function(migration, DataTypes, done) {
-    migration.createTable("ProjectTeamMembers", {
+  up: function(queryInterface, Sequelize) {
+    return queryInterface.createTable('ProjectTeamMembers', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: DataTypes.INTEGER
+        type: Sequelize.INTEGER
       },
       ProjectId: {
-        type: DataTypes.INTEGER
+        type: Sequelize.INTEGER
       },
       UserId: {
-        type: DataTypes.INTEGER
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
-        type: DataTypes.DATE
+        type: Sequelize.DATE
       },
       updatedAt: {
         allowNull: false,
-        type: DataTypes.DATE
+        type: Sequelize.DATE
       }
-    }).done(done);
+    });
   },
-  down: function(migration, DataTypes, done) {
-    migration.dropTable("ProjectTeamMembers").done(done);
+  down: function(queryInterface, Sequelize) {
+    return queryInterface.dropTable('ProjectTeamMembers');
   }
 };

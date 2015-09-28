@@ -1,39 +1,39 @@
-"use strict";
+'use strict';
 module.exports = {
-  up: function(migration, DataTypes, done) {
-    migration.createTable("ProductBacklogs", {
+  up: function(queryInterface, Sequelize) {
+    return queryInterface.createTable('ProductBacklogs', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: DataTypes.INTEGER
+        type: Sequelize.INTEGER
       },
       name: {
-        type: DataTypes.STRING
+        type: Sequelize.STRING
       },
       desc: {
-        type: DataTypes.TEXT
+        type: Sequelize.TEXT
       },
       ProjectId: {
-        type: DataTypes.INTEGER
+        type: Sequelize.INTEGER
       },
       priority: {
-        type: DataTypes.INTEGER
+        type: Sequelize.INTEGER
       },
       estimation: {
-        type: DataTypes.INTEGER
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
-        type: DataTypes.DATE
+        type: Sequelize.DATE
       },
       updatedAt: {
         allowNull: false,
-        type: DataTypes.DATE
+        type: Sequelize.DATE
       }
-    }).done(done);
+    });
   },
-  down: function(migration, DataTypes, done) {
-    migration.dropTable("ProductBacklogs").done(done);
+  down: function(queryInterface, Sequelize) {
+    return queryInterface.dropTable('ProductBacklogs');
   }
 };
