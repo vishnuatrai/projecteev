@@ -1,23 +1,19 @@
 {
   "development": {
-    "username": "root",
-    "password": 'root',
+    "username": "vsharm24",
+    "password": null,
     "database": "database_development",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "postgres"
   },
   "test": {
     "username": "root",
-    "password": 'root',
+    "password": null,
     "database": "database_test",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "postgres"
   },
   "production": {
-    "username": "root",
-    "password": 'root',
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "use_env_variable": "DATABASE_URL"
   }
 }
